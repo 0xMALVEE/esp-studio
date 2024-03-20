@@ -1,0 +1,19 @@
+fieldTranslations:
+  name:
+    en: Name
+    fa: ''
+  value:
+    en: Value
+    fa: ''
+  type:
+    en: Type
+    fa: ''
+  mode:
+    en: Mode
+    fa: ''
+  readers:
+    en: Readers
+    fa: ''
+  writers:
+    en: Writers
+    fa: ''

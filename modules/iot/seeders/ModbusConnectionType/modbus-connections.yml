@@ -1,0 +1,16 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: serial
+  name: Serial
+  translations:
+    - languageId: fa
+      name: سریال
+
+- visibility: A
+  workspaceId: system
+  uniqueId: tcp
+  name: TCP
+  translations:
+    - languageId: fa
+      name: TCP
+

@@ -1,0 +1,336 @@
+syntax = "proto3";
+    option go_package = "./artifacts/academy-server/release-tsjs/modules/wallet";
+
+import "artifacts/academy-server/release-tsjs/core/common.proto";
+import "artifacts/academy-server/release-tsjs/modules/drive/index.proto";
+import "artifacts/academy-server/release-tsjs/modules/currency/index.proto";
+
+
+
+
+  
+
+  
+
+  
+      
+service PaymentRequests {
+  rpc PaymentRequestActionCreate (PaymentRequestEntity) returns (PaymentRequestCreateReply) {}
+  rpc PaymentRequestActionUpdate (PaymentRequestEntity) returns (PaymentRequestCreateReply) {}
+
+  rpc PaymentRequestActionQuery (QueryFilterRequest) returns (PaymentRequestQueryReply) {}
+  rpc PaymentRequestActionGetOne (QueryFilterRequest) returns (PaymentRequestReply) {}
+  rpc PaymentRequestActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message PaymentRequestCreateReply {
+	PaymentRequestEntity data  = 1;
+	IError error = 2;
+}
+
+message PaymentRequestReply {
+	PaymentRequestEntity data = 1;
+	IError error = 2;
+}
+
+message PaymentRequestQueryReply {
+	repeated PaymentRequestEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+;
+
+
+;
+
+;
+
+
+
+
+
+ 
+message PaymentRequestEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string virtualAccountId  = 9; // @tag(yaml:"virtualAccountId" validate:"required")
+  VirtualAccountEntity virtualAccount = 10; // @tag(gorm:"foreignKey:VirtualAccountId;references:UniqueId" json:"virtualAccount" yaml:"virtualAccount" fbtype:"one")
+
+  optional string provider = 11; // @tag(  yaml:"provider"  )
+
+  /* Many 2 many entities */
+  repeated string attachmentsListId  = 13; // @tag(gorm:"-" sql:"-" yaml:"attachmentsListId")
+  repeated FileEntity attachments = 14; // @tag(gorm:"many2many:paymentRequest_attachments;foreignKey:UniqueId;references:UniqueId" yaml:"attachments" fbtype:"many2many")
+
+  optional double amount = 15; // @tag(  yaml:"amount"  )
+
+  string amountFormatted = 17; // @tag(sql:"-")
+
+  optional string authority = 18; // @tag(  yaml:"authority"  )
+
+  optional string status = 19; // @tag(  yaml:"status"  )
+
+  /* One 2 one to external entity */
+  optional string currencyId  = 21; // @tag(yaml:"currencyId" )
+  CurrencyEntity currency = 22; // @tag(gorm:"foreignKey:CurrencyId;references:UniqueId" json:"currency" yaml:"currency" fbtype:"one")
+
+  int64 rank = 23; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 24; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 25; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 26; // @tag(sql:"-")
+  string updatedFormatted = 27; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;
+;
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+message PaymentRequestResolveDto {
+	string action = 1;          // @tag(json:"action")
+	string paymentRequestId = 2; // @tag(json:"paymentRequestId")
+	string virtualAccountId = 3; // @tag(json:"virtualAccountId")
+}
+
+message PaymentRequestResolveResultDto {
+	optional VirtualTransactionEntity transaction = 1; // @tag(json:"virtualTransaction")
+	optional PaymentRequestEntity paymentRequest  = 2;   // @tag(json:"paymentRequest")
+}
+
+
+
+
+  
+
+  
+
+  
+      
+service VirtualAccounts {
+  rpc VirtualAccountActionCreate (VirtualAccountEntity) returns (VirtualAccountCreateReply) {}
+  rpc VirtualAccountActionUpdate (VirtualAccountEntity) returns (VirtualAccountCreateReply) {}
+
+  rpc VirtualAccountActionQuery (QueryFilterRequest) returns (VirtualAccountQueryReply) {}
+  rpc VirtualAccountActionGetOne (QueryFilterRequest) returns (VirtualAccountReply) {}
+  rpc VirtualAccountActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message VirtualAccountCreateReply {
+	VirtualAccountEntity data  = 1;
+	IError error = 2;
+}
+
+message VirtualAccountReply {
+	VirtualAccountEntity data = 1;
+	IError error = 2;
+}
+
+message VirtualAccountQueryReply {
+	repeated VirtualAccountEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+;
+
+
+
+
+
+ 
+message VirtualAccountEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string currencyId  = 9; // @tag(yaml:"currencyId" validate:"required")
+  CurrencyEntity currency = 10; // @tag(gorm:"foreignKey:CurrencyId;references:UniqueId" json:"currency" yaml:"currency" fbtype:"one")
+
+  optional string name = 11; // @tag(  yaml:"name"  )
+
+  optional double summary = 12; // @tag(  yaml:"summary"  )
+
+  string summaryFormatted = 14; // @tag(sql:"-")
+
+  int64 rank = 15; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 16; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 17; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 18; // @tag(sql:"-")
+  string updatedFormatted = 19; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+message BasicVATransactionReqDto {
+	string virtualAccountId = 1;
+	double amount = 2;
+    string subject = 3;
+}
+
+
+
+
+  
+
+  
+
+  
+      
+service VirtualTransactions {
+  rpc VirtualTransactionActionCreate (VirtualTransactionEntity) returns (VirtualTransactionCreateReply) {}
+  rpc VirtualTransactionActionUpdate (VirtualTransactionEntity) returns (VirtualTransactionCreateReply) {}
+
+  rpc VirtualTransactionActionQuery (QueryFilterRequest) returns (VirtualTransactionQueryReply) {}
+  rpc VirtualTransactionActionGetOne (QueryFilterRequest) returns (VirtualTransactionReply) {}
+  rpc VirtualTransactionActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message VirtualTransactionCreateReply {
+	VirtualTransactionEntity data  = 1;
+	IError error = 2;
+}
+
+message VirtualTransactionReply {
+	VirtualTransactionEntity data = 1;
+	IError error = 2;
+}
+
+message VirtualTransactionQueryReply {
+	repeated VirtualTransactionEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+;
+
+
+
+
+
+ 
+message VirtualTransactionEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string currencyId  = 9; // @tag(yaml:"currencyId" validate:"required")
+  CurrencyEntity currency = 10; // @tag(gorm:"foreignKey:CurrencyId;references:UniqueId" json:"currency" yaml:"currency" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string virtualAccountId  = 12; // @tag(yaml:"virtualAccountId" validate:"required")
+  VirtualAccountEntity virtualAccount = 13; // @tag(gorm:"foreignKey:VirtualAccountId;references:UniqueId" json:"virtualAccount" yaml:"virtualAccount" fbtype:"one")
+
+  optional string subject = 14; // @tag(  yaml:"subject"  )
+
+  optional string previousTransactionId = 15; // @tag(  yaml:"previousTransactionId"  )
+
+  optional double amount = 16; // @tag(  yaml:"amount"  )
+
+  string amountFormatted = 18; // @tag(sql:"-")
+
+  optional double summary = 19; // @tag(  yaml:"summary"  )
+
+  string summaryFormatted = 21; // @tag(sql:"-")
+
+  int64 rank = 22; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 23; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 24; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 25; // @tag(sql:"-")
+  string updatedFormatted = 26; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+

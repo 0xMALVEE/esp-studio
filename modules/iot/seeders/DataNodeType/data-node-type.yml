@@ -1,0 +1,24 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: "float64"
+  name: "Float64"
+- visibility: A
+  workspaceId: system
+  uniqueId: "boolean"
+  name: "Boolean"
+- visibility: A
+  workspaceId: system
+  uniqueId: "int64"
+  name: "Int64"
+- visibility: A
+  workspaceId: system
+  uniqueId: "string"
+  name: "string"
+- visibility: A
+  workspaceId: system
+  uniqueId: "color"
+  name: "color"
+- visibility: A
+  workspaceId: system
+  uniqueId: "computedValueArray"
+  name: "Computed Value Array"

@@ -1,0 +1,692 @@
+path: iot
+dto:
+  - name: ioWriter
+    fields:
+    - name: content
+      type: string
+      validate: required
+    - name: type
+      type: string
+      validate: required
+    - name: host
+      type: string
+      validate: required
+    - name: path
+      type: string
+  - name: mqttClientConnect
+    fields:
+    - name: connect
+      type: bool
+  - name: mqttClientConnection
+    fields:
+    - name: name
+      type: string
+    - name: isConnected
+      type: bool
+  - name: writeDatum
+    fields:
+    - name: uniqueId
+      type: string
+    - name: key
+      type: string
+    - name: value
+      type: any
+
+  - name: fakeIotEnv
+    fields:
+    - name: core1temperature
+      type: float64
+    - name: core2temperature
+      type: float64
+  - name: temperatureHmiComponent
+    fields:
+    - name: viewMode
+      type: string
+    - name: units
+      type: string
+    - name: maximumTemperature
+      type: float64
+      rules:
+        maximumValue: 1000
+    - name: minimumTemperature
+      type: float64
+  - name: serialPort
+    fields:
+    - name: address
+      type: string
+    # - name: uniqueId
+    #   type: string
+  - name: dataNodeReaderConfig
+    fields:
+    - name: interval
+      type: int64
+  - name: dataNodeConnectionData
+    fields:
+      - name: subKey
+        type: string
+  - name: intervalNodeConfig
+    fields:
+      - name: interval
+        type: int64
+  - name: cronjobConfig
+    fields:
+      - name: expression
+        type: string
+  - name: dataNodeReaderFnDef
+    fields:
+      - name: fn
+        type: string
+      - name: description
+        type: string
+      - name: reads
+        type: string
+      - name: writes
+        type: string
+  - name: dnReadMQTTTopicConfig
+    fields:
+      - name: topic
+        type: string
+      - name: qos
+        type: string
+      - name: message
+        type: string
+  - name: dnWriteMQTTTopicConfig
+    fields:
+      - name: topic
+        type: string
+      - name: qos
+        type: string
+      - name: message
+        type: string
+  - name: dnWriteToHostFileSystemConfig
+    fields:
+      - name: path
+        type: string
+  - name: dnReadFsFromHostConfig
+    fields:
+      - name: path
+        type: string
+  - name: dnInterpolateConfig
+    fields:
+      - name: sources
+        primitive: float64
+        type: arrayP
+      - name: targets
+        primitive: float64
+        type: arrayP
+  - name: dnReadSerialPortConfig
+    fields:
+      - name: address
+        type: string
+      - name: baudRate
+        type: int64
+  - name: dnModbusTcpConfig
+    fields:
+      - name: timeOut
+        type: int64
+      - name: slaveId
+        type: int64
+      - name: host
+        type: string
+      - name: port
+        type: string
+  - name: dnModbusRtuConfig
+    fields:
+      - name: baudRate
+        type: int64
+      - name: dataBits
+        type: int64
+      - name: parity
+        type: string
+      - name: stopBits
+        type: int64
+      - name: slaveId
+        type: int64
+      - name: timeout
+        type: int64
+      - name: address
+        type: string
+  - name: dnWriteSerialPortConfig
+    fields:
+      - name: address
+        type: string
+  - name: dnWriteUdpConfig
+    fields:
+      - name: host
+        type: string
+      - name: port
+        type: string
+  - name: dnReadWriteDataNode
+    fields:
+      - name: nodeId
+        type: string
+
+    
+
+entities:
+  - name: mqttConnection
+    patch: true
+    get: true
+    post: true
+    importList:
+      - "modules/iot/MqttVersionDefinitions.dyno.proto"
+    fields:
+    - name: ssl 
+      type: bool
+    - name: autoReconnect
+      type: bool
+    - name: cleanSession
+      type: bool
+    - name: lastWillRetain
+      type: bool
+    - name: port
+      type: int64
+    - name: keepAlive
+      type: int64
+    - name: connectTimeout
+      type: int64
+    - name: lastWillQos
+      type: int64
+    - name: clientId
+      type: string
+    - name: name
+      type: string
+    - name: host
+      type: string
+    - name: username
+      type: string
+    - name: password
+      type: string
+    - name: mqttVersion
+      type: one
+      target: MqttVersionEntity
+    - name: lastWillTopic
+      type: string
+    - name: lastWillPayload
+      type: string
+  - name: gpioState
+    c: true
+    importList:
+      - "modules/iot/GpioDefinitions.dyno.proto"
+      - "modules/iot/GpioModeDefinitions.dyno.proto"
+    fields:
+    - name: gpioMode
+      type: one
+      target: GpioModeEntity
+      allowCreate: false
+    - name: gpioIndexSnapshot
+      type: int64  
+    - name: gpioModeSnapshot
+      type: int64
+    - name: gpioValueSnapshot
+      type: int64
+
+    - name: gpio
+      type: one
+      target: GpioEntity
+      allowCreate: false
+
+  - name: mqttVersion
+    fields:
+    - name: version
+      type: string
+
+  - name: memoryStat
+    c: true
+    fields:
+    - name: heapSize
+      type: int64
+  - name: gpioMode
+    c: true
+    fields:
+    - name: key
+      type: string
+    - name: index
+      type: int64
+    - name: description
+      type: string
+      translate: true
+
+  - name: modbusConnectionType
+    fields:
+    - name: name
+      type: string
+      translate: true
+  - name: modbusFunctionCode
+    fields:
+    - name: name
+      type: string
+      translate: true
+    - name: code
+      type: int64
+  - name: modbusVariableType
+    fields:
+    - name: name
+      type: string
+      translate: true
+  - name: physicalSection
+    fields:
+    - name: name
+      type: string
+      translate: true
+  - name: interactiveMap
+    fields:
+    - name: name
+      type: string
+      translate: true
+  - name: movableObject
+    importList:
+    - "modules/iot/InteractiveMapDefinitions.dyno.proto"
+    fields:
+    - name: name
+      type: string
+      translate: true
+    - name: interactiveMaps
+      type: many2many
+      target: InteractiveMapEntity
+  - name: spaceTimeSnapshot
+    cliShort: sts
+    cliDescription: History of a location in a time series, used for tracking a path
+    importList:
+    - "modules/iot/MovableObjectDefinitions.dyno.proto"
+    fields:
+    - name: lat
+      type: float64
+      validate: required
+    - name: lng
+      type: float64
+      validate: required
+    - name: alt
+      type: float64
+      validate: required
+    - name: movableObject
+      type: one
+      target: MovableObjectEntity
+  - name: gpio
+    c: true
+    importList:
+    - "modules/iot/GpioModeDefinitions.dyno.proto"
+    fields:
+    - name: name
+      type: string
+    - name: index
+      type: int64
+    - name: analogFunction
+      type: string
+    - name: rtcGpio
+      type: string
+    - name: comments
+      type: string
+    - name: mode
+      type: one
+      target: GpioModeEntity
+      allowCreate: false
+
+  - name: deviceType
+    fields:
+    - name: name
+      type: string
+      translate: true
+  - name: modbusTransmissionMode
+    fields:
+    - name: name
+      type: string
+      translate: true
+  - name: modbusTask
+    importList:
+      - "modules/iot/ModbusConnectionTypeDefinitions.dyno.proto"
+      - "modules/iot/ModbusVariableTypeDefinitions.dyno.proto"
+      - "modules/iot/ModbusFunctionCodeDefinitions.dyno.proto"
+      - "modules/iot/DeviceDefinitions.dyno.proto"
+    fields:
+    - name: name
+      type: string
+    - name: modbusId
+      type: int64
+    - name: device
+      type: one
+      target: DeviceEntity
+      allowCreate: false
+    - name: connectionType
+      type: one
+      target: ModbusConnectionTypeEntity
+      allowCreate: false
+    - name: functionCode
+      type: one
+      target: ModbusFunctionCodeEntity
+      allowCreate: false
+    - name: register
+      type: int64
+    - name: writeInterval
+      type: int64
+    - name: readInterval
+      type: int64
+    - name: range
+      type: int64
+    - name: length
+      type: int64
+    - name: variableType
+      type: one
+      target: ModbusVariableTypeEntity
+      allowCreate: false
+
+  - name: device
+    cte: true
+    importList:
+      - "modules/iot/ModbusTransmissionModeDefinitions.dyno.proto"
+      - "modules/iot/DeviceTypeDefinitions.dyno.proto"
+    fields:
+    - name: name
+      type: string
+      translate: true
+    - name: model
+      type: string
+    - name: ip
+      type: string
+      validate: ip
+    - name: wifiUser
+      type: string  
+    - name: wifiPassword
+      type: string
+    - name: securityType
+      type: string
+    - name: type
+      type: one
+      target: DeviceTypeEntity
+      allowCreate: false
+    - name: deviceModbusConfig
+      type: object
+      fields:
+      - name: mode
+        type: one
+        target: ModbusTransmissionModeEntity
+        allowCreate: false
+      - name: baudRate
+        type: int64
+      - name: dataBits
+        type: int64
+      - name: parity
+        type: int64
+      - name: stopBit
+        type: int64
+      - name: timeout
+        type: int64
+
+  - name: dataNodeType
+    fields:
+    - name: name
+      type: string
+  - name: dataNodeMode
+    fields:
+    - name: name
+      type: string
+
+  - name: nodeWriter
+    fields:
+    - name: name
+      type: string
+    - name: nativeFn
+      type: string
+    - name: config
+      type: json
+
+  
+  - name: controlSheet
+    postFormatter: ControlSheetResponseMask
+    importList:
+    - "modules/iot/DataNodeDefinitions.dyno.proto"
+    fields:
+    - name: isRunning
+      type: bool
+    - name: name
+      type: string
+      translate: true
+    - name: objects
+      type: array
+      fields:
+      - name: width
+        type: float64
+      - name: height
+        type: float64
+      - name: type
+        type: string
+      - name: selected
+        type: bool
+      - name: meta
+        type: json
+        matches:
+        - dto: dnInterpolateConfig
+
+      - name: dragging
+        type: bool
+      - name: id
+        type: string
+      - name: connections
+        type: array
+        fields:
+          - name: type
+            type: text
+            enum:
+              - target
+              - source
+          - name: data
+            type: json
+        # - name: node
+      # - name: data
+      #   type: object
+      #   fields:
+        #   type: one
+        #   target: ControlSheetObjectsEntity
+        # - name: interval
+        #   type: int64
+        # - name: selectedSubNodes
+        #   type: many2many
+        #   target: DataNodeValuesEntity
+      - name: position
+        type: object
+        fields:
+        - name: x
+          type: float64
+        - name: y
+          type: float64
+      - name: positionAbsolute
+        type: object
+        fields:
+        - name: x
+          type: float64
+        - name: y
+          type: float64
+
+    - name: edges
+      type: array
+      fields:
+      - name: source
+        type: string
+      - name: sourceHandle
+        type: string
+      - name: target
+        type: string
+      - name: targetHandle
+        type: string
+      - name: id
+        type: string
+
+  - name: expanderFunction
+    fields:
+    - name: name
+      type: string
+      translate: true
+    - name: nativeFn
+      type: string
+    
+
+  - name: nodeReader
+    fields:
+    - name: name
+      type: string
+    - name: nativeFn
+      type: string
+    - name: config
+      type: string
+
+  - name: dataNode
+    importList:
+    - "modules/iot/DataNodeTypeDefinitions.dyno.proto"
+    - "modules/iot/DataNodeModeDefinitions.dyno.proto"
+    - "modules/iot/NodeReaderDefinitions.dyno.proto"
+    - "modules/iot/NodeWriterDefinitions.dyno.proto"
+    - "modules/iot/ExpanderFunctionDefinitions.dyno.proto"
+  
+    fields:
+    - name: name
+      validate: required
+      type: string
+    - name: expanderFunction
+      type: one
+      target: ExpanderFunctionEntity
+    - name: values
+      type: array
+      fields:
+      - name: key
+        type: string
+      - name: valueInt64
+        type: int64
+      - name: valueFloat64
+        type: float64
+      - name: valueString
+        type: string
+      - name: valueBoolean
+        type: bool
+      - name: valueType
+        type: string
+      - name: value
+        type: any
+      - name: readable
+        type: bool
+      - name: writable
+        type: bool
+    - name: type
+      type: one
+      target: DataNodeTypeEntity
+    - name: mode
+      type: one
+      target: DataNodeModeEntity
+    - name: readers
+      type: array
+      fields:
+      - name: reader
+        type: one
+        target: NodeReaderEntity
+      - name: config
+        type: json
+    - name: writers
+      type: array
+      fields:
+      - name: writer
+        type: one
+        target: NodeWriterEntity
+      - name: config
+        type: json
+  # each data which will be saved in the database
+  - name: nodeDatum
+    importList:
+    - "modules/iot/DataNodeDefinitions.dyno.proto"
+    fields:
+    - name: node
+      type: one
+      target: DataNodeEntity
+    - name: valueFloat64
+      type: float64
+      pointer: true
+    - name: valueInt64
+      type: int64
+      pointer: true
+    - name: valueString
+      type: string
+    - name: valueBoolean
+      type: bool
+    - name: ingestedAt
+      type: datenano
+
+  - name: hmiComponentType
+    fields:
+    - name: name
+      type: string
+      translate: true
+    - name: isDirectInteractable
+      type: bool
+  - name: flowValue
+    fields:
+    - name: connectionId
+      type: string
+    - name: valueInt
+      type: int64
+    - name: valueString
+      type: string
+    - name: valueFloat
+      type: float64
+    - name: valueType
+      type: int64
+    
+  - name: hmi
+    postFormatter: HmiResponseMask
+    importList:
+      - "modules/iot/DataNodeDefinitions.dyno.proto"
+      - "modules/iot/HmiComponentTypeDefinitions.dyno.proto"
+    fields:
+    - name: isRunning
+      type: bool
+    - name: name
+      type: string
+      validate: required
+      translate: true
+    - name: layout
+      type: json
+    - name: components
+      type: array
+      fields:
+      - name: layoutMode
+        type: string
+      - name: data
+        type: json
+        matches:
+        - dto: temperatureHmiComponent
+      - name: type
+        type: one
+        target: HmiComponentTypeEntity
+      - name: label
+        type: string
+      - name: icon
+        type: string
+      - name: readSubKey
+        type: string
+      - name: read
+        type: one
+        target: DataNodeEntity
+      - name: write
+        type: one
+        target: DataNodeEntity
+      - name: position
+        type: object
+        fields:
+        - name: x
+          type: int64
+        - name: y
+          type: int64
+        - name: width
+          type: int64
+        - name: height
+          type: int64
+      - name: states
+        type: array
+        fields:
+        - name: color
+          type: string
+        - name: colorFilter
+          type: string
+        - name: tag
+          type: string
+        - name: label
+          type: string
+        - name: value
+          type: string

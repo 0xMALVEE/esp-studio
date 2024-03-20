@@ -1,0 +1,40 @@
+{
+  "go.useLanguageServer": true, 
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/tmp": true
+  },
+  "yaml.completion": true,
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.go$",
+        "cmd": "cd ${workspaceFolder} && make e-dev"
+      },
+      {
+        "match": "\\Module3.yml$",
+        "cmd": "e gen gof --path ${workspaceFolder} --def ${file} --no-cache true && e gen react --path ${workspaceFolder}/ui/src/sdk/esp-studio --def ${file}"
+      },
+    ]
+  },
+  "files.associations": {
+    "*.ejs": "html",
+    "__node_handle": "cpp",
+    "__bit_reference": "cpp",
+    "bitset": "cpp",
+    "map": "cpp",
+    "set": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "chrono": "cpp",
+    "locale": "cpp",
+    "memorystatdefinitions.dyno.h": "c",
+    "memorystatcjson.dyno.h": "c",
+    "fireback.h": "c",
+    "memorystathttp.dyno.h": "c",
+    "gpiomodehttp.dyno.h": "c"
+  },
+  "cmake.sourceDirectory": "/Users/ali/work/products/backend/cmd/academy-cordova/platforms/android/app/src/main/cpp"
+}

@@ -1,0 +1,218 @@
+syntax = "proto3";
+    option go_package = "./artifacts/academy-server/release-tsjs/modules/currency";
+
+import "artifacts/academy-server/release-tsjs/core/common.proto";
+
+
+
+
+  
+
+  
+
+  
+      
+service Currencys {
+  rpc CurrencyActionCreate (CurrencyEntity) returns (CurrencyCreateReply) {}
+  rpc CurrencyActionUpdate (CurrencyEntity) returns (CurrencyCreateReply) {}
+
+  rpc CurrencyActionQuery (QueryFilterRequest) returns (CurrencyQueryReply) {}
+  rpc CurrencyActionGetOne (QueryFilterRequest) returns (CurrencyReply) {}
+  rpc CurrencyActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message CurrencyCreateReply {
+	CurrencyEntity data  = 1;
+	IError error = 2;
+}
+
+message CurrencyReply {
+	CurrencyEntity data = 1;
+	IError error = 2;
+}
+
+message CurrencyQueryReply {
+	repeated CurrencyEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message CurrencyEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated CurrencyEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string symbol = 9; // @tag(  yaml:"symbol"  )
+
+  optional string name = 10; // @tag(translate:"true"  yaml:"name"  )
+
+  optional string symbolNative = 11; // @tag(  yaml:"symbolNative"  )
+
+  optional int64 decimalDigits = 12; // @tag(  yaml:"decimalDigits"  )
+
+  optional int64 rounding = 13; // @tag(  yaml:"rounding"  )
+
+  optional string code = 14; // @tag(  yaml:"code"  )
+
+  optional string namePlural = 15; // @tag(  yaml:"namePlural"  )
+
+  int64 rank = 16; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 17; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 18; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 19; // @tag(sql:"-")
+  string updatedFormatted = 20; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message CurrencyEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service PriceTags {
+  rpc PriceTagActionCreate (PriceTagEntity) returns (PriceTagCreateReply) {}
+  rpc PriceTagActionUpdate (PriceTagEntity) returns (PriceTagCreateReply) {}
+
+  rpc PriceTagActionQuery (QueryFilterRequest) returns (PriceTagQueryReply) {}
+  rpc PriceTagActionGetOne (QueryFilterRequest) returns (PriceTagReply) {}
+  rpc PriceTagActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message PriceTagCreateReply {
+	PriceTagEntity data  = 1;
+	IError error = 2;
+}
+
+message PriceTagReply {
+	PriceTagEntity data = 1;
+	IError error = 2;
+}
+
+message PriceTagQueryReply {
+	repeated PriceTagEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+
+
+
+ 
+message PriceTagEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* This is an object, another entity needs to be created for */
+  /*repeated PriceTagVariationEntity variations = 8; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"variations")*/
+  repeated PriceTagVariationEntity variations = 8; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"variations" fbtype:"array")
+
+  int64 rank = 9; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 10; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 11; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 12; // @tag(sql:"-")
+  string updatedFormatted = 13; // @tag(sql:"-")
+}
+
+
+
+  
+
+ 
+message PriceTagVariationEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string currencyId  = 9; // @tag(yaml:"currencyId" )
+  CurrencyEntity currency = 10; // @tag(gorm:"foreignKey:CurrencyId;references:UniqueId" json:"currency" yaml:"currency" fbtype:"one")
+
+  optional double amount = 11; // @tag(  yaml:"amount"  )
+
+  int64 rank = 12; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 13; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 14; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 15; // @tag(sql:"-")
+  string updatedFormatted = 16; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+

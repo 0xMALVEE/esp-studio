@@ -1,0 +1,28 @@
+- uniqueId: equal
+  visibility: A
+  name: Equal
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: مساوی
+- uniqueId: notEqual
+  visibility: A
+  name: Not equal
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: نامساوی
+- uniqueId: lessThan
+  visibility: A
+  name: Less than
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: کمتر
+- uniqueId: moreThan
+  visibility: A
+  name: Less than
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: کمتر از

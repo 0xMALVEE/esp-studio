@@ -1,0 +1,84 @@
+- label: Data & Flow
+  uniqueId: data_flow
+  visibility: A
+  workspaceId: system
+  translations:
+    - languageId: fa
+      label: دیتا و کنترل
+    - languageId: en
+      label: Data & Control
+- href: "/control-sheets"
+  workspaceId: system
+  icon: $ctrlSheet
+  uniqueId: Control Sheets
+  visibility: A
+  label: Control Sheets
+  translations:
+    - languageId: fa
+      label: صفحه کنترل
+    - languageId: en
+      label: Control Sheet
+  activeMatcher: /control-sheet/
+  applyType: permission
+  capabilityId: root/controlsheet/query
+  parentId: data_flow
+- href: "/hmis"
+  workspaceId: system
+  icon: $ctrlSheet
+  uniqueId: Hmis
+  visibility: A
+  label: Hmis
+  translations:
+    - languageId: fa
+      label: اچ ام آی
+    - languageId: en
+      label: Hmi
+  activeMatcher: /hmi/
+  applyType: permission
+  capabilityId: root/hmi/query
+  parentId: data_flow
+- href: "/mqtt-connections"
+  workspaceId: system
+  icon: $mqtt
+  uniqueId: MQTT Connections
+  visibility: A
+  label: MQTT Connections
+  translations:
+    - languageId: fa
+      label: اتصالات MQTT
+    - languageId: en
+      label: MQTT Connections
+  activeMatcher: /mqtt-connection/
+  applyType: permission
+  capabilityId: root/mqttconnection/query
+  parentId: data_flow
+- href: "/data-nodes"
+  workspaceId: system
+  icon: $dataNode
+  uniqueId: Data Nodes
+  visibility: A
+  label: Data Nodes
+  translations:
+    - languageId: en
+      label: Data Nodes
+    - languageId: fa
+      label: دیتانود
+  activeMatcher: /data-node/
+  applyType: permission
+  capabilityId: root/datanode/query
+  parentId: data_flow
+- href: "/flow-values"
+  workspaceId: system
+  icon: $flowValue
+  uniqueId: flow_values
+  visibility: A
+  label: History
+  translations:
+    - languageId: en
+      label: History
+    - languageId: fa
+      label: تاریخچه
+  activeMatcher: /flow-value/
+  applyType: permission
+  capabilityId: root/flowvalues/query
+  parentId: data_flow

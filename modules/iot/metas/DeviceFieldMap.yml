@@ -1,0 +1,25 @@
+fieldTranslations:
+  name:
+    en: Name
+    fa: ''
+  model:
+    en: Model
+    fa: ''
+  ip:
+    en: Ip
+    fa: ''
+  wifiUser:
+    en: Wifi User
+    fa: ''
+  wifiPassword:
+    en: Wifi Password
+    fa: ''
+  securityType:
+    en: Security Type
+    fa: ''
+  type:
+    en: Type
+    fa: ''
+  deviceModbusConfig:
+    en: Device Modbus Config
+    fa: ''

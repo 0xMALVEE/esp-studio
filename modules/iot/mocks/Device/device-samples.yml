@@ -1,0 +1,124 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: "device_modbus"
+  userId: null
+  translations: 
+    - languageId: fa
+      name: "دستگاه شماره ۱"
+  name: "Device 1"
+  model: "298031984920"
+  ip: "192.168.1.2"
+  wifiUser: "WIFI-SMDQ"
+  wifiPassword: "12345678"
+  securityType: "WAP2"
+  typeId: modbus
+  deviceModbusConfig:
+    baudRate: 9600
+    dataBits: 8
+    parity: 2
+    stopBit: 4
+    timeout: 2000
+- visibility: A
+  workspaceId: system
+  parentId: device_modbus
+  uniqueId: "device_modbus_sub1"
+  userId: null
+  translations: 
+    - languageId: fa
+      name: "دستگاه شماره ۲"
+  name: "Device 2"
+  model: "298031984920"
+  ip: "192.168.1.5"
+  wifiUser: "WIFI-EQE"
+  wifiPassword: "123adwe"
+  securityType: "WAP2"
+  typeId: modbus
+  deviceModbusConfig:
+    baudRate: 9600
+    dataBits: 4
+    parity: 2
+    stopBit: 1
+    timeout: 32000
+- visibility: A
+  workspaceId: system
+  parentId: device_modbus
+  uniqueId: "device_modbus_sub2"
+  userId: null
+  translations: 
+    - languageId: fa
+      name: "دستگاه شماره ۳"
+  name: "Device 3"
+  model: "298031984920"
+  ip: "192.168.1.15"
+  wifiUser: "WIFI-WQ@3"
+  wifiPassword: "qweq2311"
+  securityType: "WAP2"
+  typeId: modbus
+  deviceModbusConfig:
+    baudRate: 2600
+    dataBits: 4
+    parity: 2
+    stopBit: 1
+    timeout: 32000
+- visibility: A
+  workspaceId: system
+  uniqueId: "device_modbus_m"
+  userId: null
+  translations: 
+    - languageId: fa
+      name: "دستگاه شماره ۱ m"
+  name: "Device 1"
+  model: "298031984920"
+  ip: "192.168.1.2"
+  wifiUser: "WIFI-SMDQ"
+  wifiPassword: "12345678"
+  securityType: "WAP2"
+  typeId: modbus
+  deviceModbusConfig:
+    baudRate: 9600
+    dataBits: 8
+    parity: 2
+    stopBit: 4
+    timeout: 2000
+- visibility: A
+  workspaceId: system
+  parentId: device_modbus_m
+  uniqueId: "device_modbus_subm1"
+  userId: null
+  translations: 
+    - languageId: fa
+      name: "دستگاه شماره ۲"
+  name: "Device M2"
+  model: "298031984920"
+  ip: "192.168.1.5"
+  wifiUser: "WIFI-EQE"
+  wifiPassword: "123adwe"
+  securityType: "WAP2"
+  typeId: modbus
+  deviceModbusConfig:
+    baudRate: 9600
+    dataBits: 4
+    parity: 2
+    stopBit: 1
+    timeout: 32000
+- visibility: A
+  workspaceId: system
+  parentId: device_modbus_m
+  uniqueId: "device_modbus_subm2"
+  userId: null
+  translations: 
+    - languageId: fa
+      name: "دستگاه شماره m ۳"
+  name: "Device 3 M"
+  model: "298031984920"
+  ip: "192.168.1.15"
+  wifiUser: "WIFI-WQ@3"
+  wifiPassword: "qweq2311"
+  securityType: "WAP2"
+  typeId: modbus
+  deviceModbusConfig:
+    baudRate: 2600
+    dataBits: 4
+    parity: 2
+    stopBit: 1
+    timeout: 32000

@@ -1,0 +1,30 @@
+- visibility: A
+  workspaceId: system
+  name: Host FS File System
+  nativeFn: DnWriteToHostFileSystem
+  uniqueId: DnWriteToHostFileSystem
+- visibility: A
+  workspaceId: system
+  name: MQTT Topic
+  nativeFn: mqtt_send_topic
+  uniqueId: mqtt_send_topic
+- visibility: A
+  workspaceId: system
+  name: Serial Port
+  nativeFn: DnWriteToSerialPort
+  uniqueId: DnWriteToSerialPort
+- visibility: A
+  workspaceId: system
+  name: Write UDP
+  nativeFn: DnWriteToUdp
+  uniqueId: DnWriteToUdp
+- visibility: A
+  workspaceId: system
+  name: Modbus TCP
+  nativeFn: DnWriteModbusTCP
+  uniqueId: DnWriteModbusTCP
+- visibility: A
+  workspaceId: system
+  name: Modbus RTU
+  nativeFn: DnWriteModbusRTU
+  uniqueId: DnWriteModbusRTU

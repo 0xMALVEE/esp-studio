@@ -1,0 +1,19 @@
+fieldTranslations:
+  name:
+    en: Name
+    fa: ''
+  index:
+    en: Index
+    fa: ''
+  analogFunction:
+    en: Analog Function
+    fa: ''
+  rtcGpio:
+    en: Rtc Gpio
+    fa: ''
+  comments:
+    en: Comments
+    fa: ''
+  mode:
+    en: Mode
+    fa: ''

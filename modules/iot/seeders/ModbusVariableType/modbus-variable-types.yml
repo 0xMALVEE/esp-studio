@@ -1,0 +1,16 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: integer
+  name: Integer
+  translations:
+    - languageId: fa
+      name: Integer
+
+- visibility: A
+  workspaceId: system
+  uniqueId: word
+  name: Word
+  translations:
+    - languageId: fa
+      name: Word
+

@@ -1,0 +1,16 @@
+fieldTranslations:
+  connectionId:
+    en: Connection Id
+    fa: ''
+  valueInt:
+    en: Value Int
+    fa: ''
+  valueString:
+    en: Value String
+    fa: ''
+  valueFloat:
+    en: Value Float
+    fa: ''
+  valueType:
+    en: Value Type
+    fa: ''

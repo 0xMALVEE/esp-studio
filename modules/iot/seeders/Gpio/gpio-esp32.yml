@@ -1,0 +1,303 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO0
+  name: GPIO0
+  index: 0
+  analogFunction: ADC2_CH1
+  rtcGpio: RTC_GPIO11
+  comments: Strapping pin
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO1
+  name: GPIO1
+  index: 1
+  comments: TXD
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO2
+  name: GPIO2
+  index: 2
+  analogFunction: ADC2_CH2
+  rtcGpio: RTC_GPIO12
+  comments: Strapping pin
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO3
+  name: GPIO3
+  index: 3
+  comments: RXD
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO4
+  name: GPIO4
+  index: 4
+  analogFunction: ADC2_CH0
+  rtcGpio: RTC_GPIO10
+  comments: 
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO5
+  name: GPIO5
+  index: 5
+  analogFunction: 
+  rtcGpio: 
+  comments: Strapping pin
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO6
+  name: GPIO6
+  index: 6
+  analogFunction: 
+  rtcGpio: 
+  comments: SPI0/1
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO7
+  name: GPIO7
+  index: 7
+  analogFunction: 
+  rtcGpio: 
+  comments: SPI0/1
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO8
+  name: GPIO8
+  index: 8
+  analogFunction: 
+  rtcGpio: 
+  comments: SPI0/1
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO9
+  name: GPIO9
+  index: 9
+  analogFunction: 
+  rtcGpio: 
+  comments: SPI0/1
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPI10
+  name: GPI10
+  index: 0
+  analogFunction: 
+  rtcGpio: 
+  comments: SPI0/1
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO11
+  name: GPIO11
+  index: 11
+  analogFunction: 
+  rtcGpio: 
+  comments: SPI0/1
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO12
+  name: GPIO12
+  index: 12
+  analogFunction: ADC2_CH5
+  rtcGpio: RTC_GPIO15
+  comments: Strapping pin; JTAG
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO13
+  name: GPIO13
+  index: 13
+  analogFunction: ADC2_CH4
+  rtcGpio: RTC_GPIO14
+  comments: JTAG
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO14
+  name: GPIO14
+  index: 14
+  analogFunction: ADC2_CH6
+  rtcGpio: RTC_GPIO16
+  comments: JTAG
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO15
+  name: GPIO15
+  index: 15
+  analogFunction: ADC2_CH3
+  rtcGpio: RTC_GPIO13
+  comments: Strapping pin; JTAG
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO16
+  name: GPIO16
+  index: 16
+  analogFunction: 
+  rtcGpio: 
+  comments: SPI0/1
+
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO17
+  name: GPIO17
+  index: 17
+  analogFunction: 
+  rtcGpio: 
+  comments: SPI0/1
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO18
+  name: GPIO18
+  index: 18
+  analogFunction: 
+  rtcGpio: 
+  comments: 
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO19
+  name: GPIO19
+  index: 19
+  analogFunction: 
+  rtcGpio: 
+  comments: 
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO21
+  name: GPIO21
+  index: 21
+  analogFunction: 
+  rtcGpio: 
+  comments: 
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO22
+  name: GPIO22
+  index: 22
+  analogFunction: 
+  rtcGpio: 
+  comments: 
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO23
+  name: GPIO23
+  index: 23
+  analogFunction: 
+  rtcGpio: 
+  comments: 
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO25
+  name: GPIO25
+  index: 25
+  analogFunction: ADC2_CH8
+  rtcGpio: RTC_GPIO6
+  comments: 
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO26
+  name: GPIO26
+  index: 26
+  analogFunction: ADC2_CH9
+  rtcGpio: RTC_GPIO7
+  comments: 
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO27
+  name: GPIO27
+  index: 27
+  analogFunction: ADC2_CH7
+  rtcGpio: RTC_GPIO17
+  comments: 
+ 
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO32
+  name: GPIO32
+  index: 32
+  analogFunction: ADC1_CH4
+  rtcGpio: RTC_GPIO9
+  comments: 
+ 
+ 
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO33
+  name: GPIO33
+  index: 33
+  analogFunction: ADC1_CH5
+  rtcGpio: RTC_GPIO8
+  comments: 
+ 
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO34
+  name: GPIO34
+  index: 34
+  analogFunction: ADC1_CH6
+  rtcGpio: RTC_GPIO4
+  comments: GPI
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO35
+  name: GPIO35
+  index: 35
+  analogFunction: ADC1_CH7
+  rtcGpio: RTC_GPIO5
+  comments: GPI
+ 
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO36
+  name: GPIO36
+  index: 36
+  analogFunction: ADC1_CH0
+  rtcGpio: RTC_GPIO0
+  comments: GPI
+ 
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO37
+  name: GPIO37
+  index: 37
+  analogFunction: ADC1_CH1
+  rtcGpio: RTC_GPIO1
+  comments: GPI
+ 
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO38
+  name: GPIO38
+  index: 38
+  analogFunction: ADC1_CH2
+  rtcGpio: RTC_GPIO2
+  comments: GPI
+
+- visibility: A
+  workspaceId: system
+  uniqueId: ESP32_GPIO39
+  name: GPIO39
+  index: 39
+  analogFunction: ADC1_CH3
+  rtcGpio: RTC_GPIO3
+  comments: GPI

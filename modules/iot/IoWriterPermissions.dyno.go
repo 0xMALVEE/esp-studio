@@ -1,0 +1,15 @@
+package iot
+
+var PERM_ROOT_IOWRITER_DELETE = "root/iowriter/delete"
+var PERM_ROOT_IOWRITER_POST = "root/iowriter/post"
+var PERM_ROOT_IOWRITER_PATCH = "root/iowriter/patch"
+var PERM_ROOT_IOWRITER_QUERY = "root/iowriter/query"
+var PERM_ROOT_IOWRITER = "root/iowriter"
+
+var ALL_IOWRITER_PERMISSIONS = []string{
+	PERM_ROOT_IOWRITER_DELETE,
+	PERM_ROOT_IOWRITER_POST,
+	PERM_ROOT_IOWRITER_PATCH,
+	PERM_ROOT_IOWRITER_QUERY,
+	PERM_ROOT_IOWRITER,
+}

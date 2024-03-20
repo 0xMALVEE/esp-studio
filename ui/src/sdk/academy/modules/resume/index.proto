@@ -1,0 +1,1043 @@
+syntax = "proto3";
+    option go_package = "./artifacts/academy-server/release-tsjs/modules/resume";
+
+import "artifacts/academy-server/release-tsjs/core/common.proto";
+import "artifacts/academy-server/release-tsjs/modules/geo/index.proto";
+import "artifacts/academy-server/release-tsjs/modules/drive/index.proto";
+import "artifacts/academy-server/release-tsjs/modules/skillset/index.proto";
+
+
+
+
+  
+
+  
+
+  
+      
+service ResumeCompanys {
+  rpc ResumeCompanyActionCreate (ResumeCompanyEntity) returns (ResumeCompanyCreateReply) {}
+  rpc ResumeCompanyActionUpdate (ResumeCompanyEntity) returns (ResumeCompanyCreateReply) {}
+
+  rpc ResumeCompanyActionQuery (QueryFilterRequest) returns (ResumeCompanyQueryReply) {}
+  rpc ResumeCompanyActionGetOne (QueryFilterRequest) returns (ResumeCompanyReply) {}
+  rpc ResumeCompanyActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ResumeCompanyCreateReply {
+	ResumeCompanyEntity data  = 1;
+	IError error = 2;
+}
+
+message ResumeCompanyReply {
+	ResumeCompanyEntity data = 1;
+	IError error = 2;
+}
+
+message ResumeCompanyQueryReply {
+	repeated ResumeCompanyEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+;
+
+
+
+
+
+ 
+message ResumeCompanyEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string placeCountryId  = 9; // @tag(yaml:"placeCountryId" )
+  GeoCountryEntity placeCountry = 10; // @tag(gorm:"foreignKey:PlaceCountryId;references:UniqueId" json:"placeCountry" yaml:"placeCountry" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string workCountryId  = 12; // @tag(yaml:"workCountryId" )
+  GeoCountryEntity workCountry = 13; // @tag(gorm:"foreignKey:WorkCountryId;references:UniqueId" json:"workCountry" yaml:"workCountry" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string mainIndustryId  = 15; // @tag(yaml:"mainIndustryId" )
+  ResumeIndustryEntity mainIndustry = 16; // @tag(gorm:"foreignKey:MainIndustryId;references:UniqueId" json:"mainIndustry" yaml:"mainIndustry" fbtype:"one")
+
+  optional int64 employeeCount = 17; // @tag(  yaml:"employeeCount"  )
+
+  int64 rank = 18; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 19; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 20; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 21; // @tag(sql:"-")
+  string updatedFormatted = 22; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service Resumes {
+  rpc ResumeActionCreate (ResumeEntity) returns (ResumeCreateReply) {}
+  rpc ResumeActionUpdate (ResumeEntity) returns (ResumeCreateReply) {}
+
+  rpc ResumeActionQuery (QueryFilterRequest) returns (ResumeQueryReply) {}
+  rpc ResumeActionGetOne (QueryFilterRequest) returns (ResumeReply) {}
+  rpc ResumeActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ResumeCreateReply {
+	ResumeEntity data  = 1;
+	IError error = 2;
+}
+
+message ResumeReply {
+	ResumeEntity data = 1;
+	IError error = 2;
+}
+
+message ResumeQueryReply {
+	repeated ResumeEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+;
+
+;
+
+;
+
+
+
+
+
+ 
+message ResumeEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ResumeEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string title = 9; // @tag(translate:"true"  yaml:"title"  )
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated ResumeKeySkillsEntity keySkills = 10; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"keySkills")*/
+  repeated ResumeKeySkillsEntity keySkills = 10; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"keySkills" fbtype:"array")
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated ResumeVideosEntity videos = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"videos")*/
+  repeated ResumeVideosEntity videos = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"videos" fbtype:"array")
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated ResumePreferredPositionsEntity preferredPositions = 12; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"preferredPositions")*/
+  repeated ResumePreferredPositionsEntity preferredPositions = 12; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"preferredPositions" fbtype:"array")
+
+  optional string headline1 = 13; // @tag(translate:"true"  yaml:"headline1"  )
+
+  optional string phone = 14; // @tag(translate:"true"  yaml:"phone"  )
+
+  optional string email = 15; // @tag(translate:"true"  yaml:"email"  )
+
+  optional string headline2 = 16; // @tag(translate:"true"  yaml:"headline2"  )
+
+  /* Many 2 many entities */
+  repeated string productsListId  = 18; // @tag(gorm:"-" sql:"-" yaml:"productsListId")
+  repeated ResumeProductEntity products = 19; // @tag(gorm:"many2many:resume_products;foreignKey:UniqueId;references:UniqueId" yaml:"products" fbtype:"many2many")
+
+  /* Many 2 many entities */
+  repeated string projectsListId  = 21; // @tag(gorm:"-" sql:"-" yaml:"projectsListId")
+  repeated ResumeProjectEntity projects = 22; // @tag(gorm:"many2many:resume_projects;foreignKey:UniqueId;references:UniqueId" yaml:"projects" fbtype:"many2many")
+
+  /* Many 2 many entities */
+  repeated string companiesListId  = 24; // @tag(gorm:"-" sql:"-" yaml:"companiesListId")
+  repeated ResumeCompanyEntity companies = 25; // @tag(gorm:"many2many:resume_companies;foreignKey:UniqueId;references:UniqueId" yaml:"companies" fbtype:"many2many")
+
+  /* Many 2 many entities */
+  repeated string servicesListId  = 27; // @tag(gorm:"-" sql:"-" yaml:"servicesListId")
+  repeated ResumeServiceEntity services = 28; // @tag(gorm:"many2many:resume_services;foreignKey:UniqueId;references:UniqueId" yaml:"services" fbtype:"many2many")
+
+  int64 rank = 29; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 30; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 31; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 32; // @tag(sql:"-")
+  string updatedFormatted = 33; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ResumeEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string title = 3; // @tag(yaml:"title" json:"title");
+
+  string headline1 = 4; // @tag(yaml:"headline1" json:"headline1");
+
+  string phone = 5; // @tag(yaml:"phone" json:"phone");
+
+  string email = 6; // @tag(yaml:"email" json:"email");
+
+  string headline2 = 7; // @tag(yaml:"headline2" json:"headline2");
+
+}
+
+
+
+
+  
+
+ 
+message ResumeKeySkillsEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ResumeKeySkillsEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  optional int64 level = 10; // @tag(  yaml:"level"  )
+
+  optional int64 usage = 11; // @tag(  yaml:"usage"  )
+
+  int64 started = 13;
+  string startedFormatted = 14;
+
+  int64 rank = 15; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 16; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 17; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 18; // @tag(sql:"-")
+  string updatedFormatted = 19; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ResumeKeySkillsEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+  
+
+ 
+message ResumeVideosEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string link = 8; // @tag(  yaml:"link"  )
+
+  optional string title = 9; // @tag(  yaml:"title"  )
+
+  optional string description = 10; // @tag(  yaml:"description"  )
+
+  optional string locale = 11; // @tag(  yaml:"locale"  )
+
+  int64 rank = 12; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 13; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 14; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 15; // @tag(sql:"-")
+  string updatedFormatted = 16; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+  
+
+ 
+message ResumePreferredPositionsEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ResumePreferredPositionsEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string title = 9; // @tag(translate:"true"  yaml:"title"  )
+
+  optional string contractType = 10; // @tag(translate:"true"  yaml:"contractType"  )
+
+  optional string description = 11; // @tag(translate:"true"  yaml:"description"  )
+
+  optional string locale = 12; // @tag(  yaml:"locale"  )
+
+  int64 rank = 13; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 14; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 15; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 16; // @tag(sql:"-")
+  string updatedFormatted = 17; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ResumePreferredPositionsEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string title = 3; // @tag(yaml:"title" json:"title");
+
+  string contractType = 4; // @tag(yaml:"contractType" json:"contractType");
+
+  string description = 5; // @tag(yaml:"description" json:"description");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service ResumeIndustrys {
+  rpc ResumeIndustryActionCreate (ResumeIndustryEntity) returns (ResumeIndustryCreateReply) {}
+  rpc ResumeIndustryActionUpdate (ResumeIndustryEntity) returns (ResumeIndustryCreateReply) {}
+
+  rpc ResumeIndustryActionQuery (QueryFilterRequest) returns (ResumeIndustryQueryReply) {}
+  rpc ResumeIndustryActionGetOne (QueryFilterRequest) returns (ResumeIndustryReply) {}
+  rpc ResumeIndustryActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ResumeIndustryCreateReply {
+	ResumeIndustryEntity data  = 1;
+	IError error = 2;
+}
+
+message ResumeIndustryReply {
+	ResumeIndustryEntity data = 1;
+	IError error = 2;
+}
+
+message ResumeIndustryQueryReply {
+	repeated ResumeIndustryEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message ResumeIndustryEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ResumeIndustryEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ResumeIndustryEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service ResumeProducts {
+  rpc ResumeProductActionCreate (ResumeProductEntity) returns (ResumeProductCreateReply) {}
+  rpc ResumeProductActionUpdate (ResumeProductEntity) returns (ResumeProductCreateReply) {}
+
+  rpc ResumeProductActionQuery (QueryFilterRequest) returns (ResumeProductQueryReply) {}
+  rpc ResumeProductActionGetOne (QueryFilterRequest) returns (ResumeProductReply) {}
+  rpc ResumeProductActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ResumeProductCreateReply {
+	ResumeProductEntity data  = 1;
+	IError error = 2;
+}
+
+message ResumeProductReply {
+	ResumeProductEntity data = 1;
+	IError error = 2;
+}
+
+message ResumeProductQueryReply {
+	repeated ResumeProductEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message ResumeProductEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ResumeProductEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  optional string description = 10; // @tag(translate:"true"  yaml:"description"  )
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated ResumeProductLinksEntity links = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"links")*/
+  repeated ResumeProductLinksEntity links = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"links" fbtype:"array")
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated ResumeProductTechnologiesEntity technologies = 12; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"technologies")*/
+  repeated ResumeProductTechnologiesEntity technologies = 12; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"technologies" fbtype:"array")
+
+  int64 rank = 13; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 14; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 15; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 16; // @tag(sql:"-")
+  string updatedFormatted = 17; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ResumeProductEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+  string description = 4; // @tag(yaml:"description" json:"description");
+
+}
+
+
+
+
+
+  
+
+ 
+message ResumeProductLinksEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string url = 8; // @tag(  yaml:"url"  )
+
+  int64 rank = 9; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 10; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 11; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 12; // @tag(sql:"-")
+  string updatedFormatted = 13; // @tag(sql:"-")
+}
+
+
+
+
+
+
+  
+
+ 
+message ResumeProductTechnologiesEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ResumeProductTechnologiesEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ResumeProductTechnologiesEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service ResumeProjects {
+  rpc ResumeProjectActionCreate (ResumeProjectEntity) returns (ResumeProjectCreateReply) {}
+  rpc ResumeProjectActionUpdate (ResumeProjectEntity) returns (ResumeProjectCreateReply) {}
+
+  rpc ResumeProjectActionQuery (QueryFilterRequest) returns (ResumeProjectQueryReply) {}
+  rpc ResumeProjectActionGetOne (QueryFilterRequest) returns (ResumeProjectReply) {}
+  rpc ResumeProjectActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ResumeProjectCreateReply {
+	ResumeProjectEntity data  = 1;
+	IError error = 2;
+}
+
+message ResumeProjectReply {
+	ResumeProjectEntity data = 1;
+	IError error = 2;
+}
+
+message ResumeProjectQueryReply {
+	repeated ResumeProjectEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+;
+
+;
+
+
+;
+
+
+
+
+
+ 
+message ResumeProjectEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ResumeProjectEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string title = 9; // @tag(translate:"true"  yaml:"title"  )
+
+    optional string description = 10; // @tag(translate:"true"  yaml:"description" gorm:"text" )
+    optional string descriptionExcerpt = 11; // @tag(translate:"true" yaml:"descriptionExcerpt" gorm:"text" )
+
+    optional string technicalDescription = 12; // @tag(translate:"true"  yaml:"technicalDescription" gorm:"text" )
+    optional string technicalDescriptionExcerpt = 13; // @tag(translate:"true" yaml:"technicalDescriptionExcerpt" gorm:"text" )
+
+  /* One 2 one to external entity */
+  optional string typeId  = 15; // @tag(yaml:"typeId" )
+  ResumeProjectTypeEntity type = 16; // @tag(gorm:"foreignKey:TypeId;references:UniqueId" json:"type" yaml:"type" fbtype:"one")
+
+  /* Many 2 many entities */
+  repeated string attachmentsListId  = 18; // @tag(gorm:"-" sql:"-" yaml:"attachmentsListId")
+  repeated FileEntity attachments = 19; // @tag(gorm:"many2many:resumeProject_attachments;foreignKey:UniqueId;references:UniqueId" yaml:"attachments" fbtype:"many2many")
+
+  int64 start = 21;
+  string startFormatted = 22;
+
+  int64 end = 24;
+  string endFormatted = 25;
+
+  /* One 2 one to external entity */
+  optional string workLocationId  = 27; // @tag(yaml:"workLocationId" )
+  GeoCountryEntity workLocation = 28; // @tag(gorm:"foreignKey:WorkLocationId;references:UniqueId" json:"workLocation" yaml:"workLocation" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string companyLocationId  = 30; // @tag(yaml:"companyLocationId" )
+  GeoCountryEntity companyLocation = 31; // @tag(gorm:"foreignKey:CompanyLocationId;references:UniqueId" json:"companyLocation" yaml:"companyLocation" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string clientLocationId  = 33; // @tag(yaml:"clientLocationId" )
+  GeoCountryEntity clientLocation = 34; // @tag(gorm:"foreignKey:ClientLocationId;references:UniqueId" json:"clientLocation" yaml:"clientLocation" fbtype:"one")
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated ResumeProjectLinksEntity links = 35; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"links")*/
+  repeated ResumeProjectLinksEntity links = 35; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"links" fbtype:"array")
+
+  int64 rank = 36; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 37; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 38; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 39; // @tag(sql:"-")
+  string updatedFormatted = 40; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ResumeProjectEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string title = 3; // @tag(yaml:"title" json:"title");
+
+  string description = 4; // @tag(yaml:"description" json:"description");
+
+  string technicalDescription = 5; // @tag(yaml:"technicalDescription" json:"technicalDescription");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+ 
+message ResumeProjectLinksEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string link = 8; // @tag(  yaml:"link"  )
+
+  int64 rank = 9; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 10; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 11; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 12; // @tag(sql:"-")
+  string updatedFormatted = 13; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service ResumeProjectTypes {
+  rpc ResumeProjectTypeActionCreate (ResumeProjectTypeEntity) returns (ResumeProjectTypeCreateReply) {}
+  rpc ResumeProjectTypeActionUpdate (ResumeProjectTypeEntity) returns (ResumeProjectTypeCreateReply) {}
+
+  rpc ResumeProjectTypeActionQuery (QueryFilterRequest) returns (ResumeProjectTypeQueryReply) {}
+  rpc ResumeProjectTypeActionGetOne (QueryFilterRequest) returns (ResumeProjectTypeReply) {}
+  rpc ResumeProjectTypeActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ResumeProjectTypeCreateReply {
+	ResumeProjectTypeEntity data  = 1;
+	IError error = 2;
+}
+
+message ResumeProjectTypeReply {
+	ResumeProjectTypeEntity data = 1;
+	IError error = 2;
+}
+
+message ResumeProjectTypeQueryReply {
+	repeated ResumeProjectTypeEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message ResumeProjectTypeEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ResumeProjectTypeEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ResumeProjectTypeEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service ResumeServices {
+  rpc ResumeServiceActionCreate (ResumeServiceEntity) returns (ResumeServiceCreateReply) {}
+  rpc ResumeServiceActionUpdate (ResumeServiceEntity) returns (ResumeServiceCreateReply) {}
+
+  rpc ResumeServiceActionQuery (QueryFilterRequest) returns (ResumeServiceQueryReply) {}
+  rpc ResumeServiceActionGetOne (QueryFilterRequest) returns (ResumeServiceReply) {}
+  rpc ResumeServiceActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ResumeServiceCreateReply {
+	ResumeServiceEntity data  = 1;
+	IError error = 2;
+}
+
+message ResumeServiceReply {
+	ResumeServiceEntity data = 1;
+	IError error = 2;
+}
+
+message ResumeServiceQueryReply {
+	repeated ResumeServiceEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message ResumeServiceEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ResumeServiceEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  optional string description = 10; // @tag(translate:"true"  yaml:"description"  )
+
+  int64 rank = 11; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 12; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 13; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 14; // @tag(sql:"-")
+  string updatedFormatted = 15; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ResumeServiceEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+  string description = 4; // @tag(yaml:"description" json:"description");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service ResumeSkills {
+  rpc ResumeSkillActionCreate (ResumeSkillEntity) returns (ResumeSkillCreateReply) {}
+  rpc ResumeSkillActionUpdate (ResumeSkillEntity) returns (ResumeSkillCreateReply) {}
+
+  rpc ResumeSkillActionQuery (QueryFilterRequest) returns (ResumeSkillQueryReply) {}
+  rpc ResumeSkillActionGetOne (QueryFilterRequest) returns (ResumeSkillReply) {}
+  rpc ResumeSkillActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ResumeSkillCreateReply {
+	ResumeSkillEntity data  = 1;
+	IError error = 2;
+}
+
+message ResumeSkillReply {
+	ResumeSkillEntity data = 1;
+	IError error = 2;
+}
+
+message ResumeSkillQueryReply {
+	repeated ResumeSkillEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+;
+
+
+
+
+
+ 
+message ResumeSkillEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string skillsetId  = 9; // @tag(yaml:"skillsetId" )
+  SkillsetEntity skillset = 10; // @tag(gorm:"foreignKey:SkillsetId;references:UniqueId" json:"skillset" yaml:"skillset" fbtype:"one")
+
+  int64 rank = 11; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 12; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 13; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 14; // @tag(sql:"-")
+  string updatedFormatted = 15; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+

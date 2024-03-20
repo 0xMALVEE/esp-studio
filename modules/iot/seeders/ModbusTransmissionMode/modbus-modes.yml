@@ -1,0 +1,8 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: rtu
+  name: RTU
+  translations:
+    - languageId: fa
+      name: RTU
+

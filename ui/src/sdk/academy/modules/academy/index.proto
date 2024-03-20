@@ -1,0 +1,1793 @@
+syntax = "proto3";
+    option go_package = "./artifacts/academy-server/release-tsjs/modules/academy";
+
+import "artifacts/academy-server/release-tsjs/core/common.proto";
+import "artifacts/academy-server/release-tsjs/modules/drive/index.proto";
+import "artifacts/academy-server/release-tsjs/modules/workspaces/index.proto";
+import "artifacts/academy-server/release-tsjs/modules/geo/index.proto";
+
+
+
+
+  
+
+  
+
+  
+      
+service AcSections {
+  rpc AcSectionActionCreate (AcSectionEntity) returns (AcSectionCreateReply) {}
+  rpc AcSectionActionUpdate (AcSectionEntity) returns (AcSectionCreateReply) {}
+
+  rpc AcSectionActionQuery (QueryFilterRequest) returns (AcSectionQueryReply) {}
+  rpc AcSectionActionGetOne (QueryFilterRequest) returns (AcSectionReply) {}
+  rpc AcSectionActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcSectionCreateReply {
+	AcSectionEntity data  = 1;
+	IError error = 2;
+}
+
+message AcSectionReply {
+	AcSectionEntity data = 1;
+	IError error = 2;
+}
+
+message AcSectionQueryReply {
+	repeated AcSectionEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+;
+
+
+
+
+
+ 
+message AcSectionEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string format = 8; // @tag(  yaml:"format"  )
+
+  optional string title = 9; // @tag(  yaml:"title"  )
+
+    optional string header = 10; // @tag(  yaml:"header" gorm:"text" )
+    optional string headerExcerpt = 11; // @tag( yaml:"headerExcerpt" gorm:"text" )
+
+  optional string uniqueGroupIdentifier = 12; // @tag(  yaml:"uniqueGroupIdentifier"  )
+
+  /* Many 2 many entities */
+  repeated string attachmentsListId  = 14; // @tag(gorm:"-" sql:"-" yaml:"attachmentsListId")
+  repeated FileEntity attachments = 15; // @tag(gorm:"many2many:acSection_attachments;foreignKey:UniqueId;references:UniqueId" yaml:"attachments" fbtype:"many2many")
+
+  /* Many 2 many entities */
+  repeated string tasksListId  = 17; // @tag(gorm:"-" sql:"-" yaml:"tasksListId")
+  repeated AcTaskEntity tasks = 18; // @tag(gorm:"many2many:acSection_tasks;foreignKey:UniqueId;references:UniqueId" yaml:"tasks" fbtype:"many2many")
+
+  int64 rank = 19; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 20; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 21; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 22; // @tag(sql:"-")
+  string updatedFormatted = 23; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service AcTasks {
+  rpc AcTaskActionCreate (AcTaskEntity) returns (AcTaskCreateReply) {}
+  rpc AcTaskActionUpdate (AcTaskEntity) returns (AcTaskCreateReply) {}
+
+  rpc AcTaskActionQuery (QueryFilterRequest) returns (AcTaskQueryReply) {}
+  rpc AcTaskActionGetOne (QueryFilterRequest) returns (AcTaskReply) {}
+  rpc AcTaskActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcTaskCreateReply {
+	AcTaskEntity data  = 1;
+	IError error = 2;
+}
+
+message AcTaskReply {
+	AcTaskEntity data = 1;
+	IError error = 2;
+}
+
+message AcTaskQueryReply {
+	repeated AcTaskEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+
+
+
+ 
+message AcTaskEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string format = 8; // @tag(  yaml:"format"  )
+
+  optional string title = 9; // @tag(  yaml:"title"  )
+
+    optional string content = 10; // @tag(  yaml:"content" gorm:"text" )
+    optional string contentExcerpt = 11; // @tag( yaml:"contentExcerpt" gorm:"text" )
+
+  optional string instruction = 12; // @tag(  yaml:"instruction"  )
+
+  /* Many 2 many entities */
+  repeated string questionsListId  = 14; // @tag(gorm:"-" sql:"-" yaml:"questionsListId")
+  repeated QuestionEntity questions = 15; // @tag(gorm:"many2many:acTask_questions;foreignKey:UniqueId;references:UniqueId" yaml:"questions" fbtype:"many2many")
+
+  int64 rank = 16; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 17; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 18; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 19; // @tag(sql:"-")
+  string updatedFormatted = 20; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service ClassRooms {
+  rpc ClassRoomActionCreate (ClassRoomEntity) returns (ClassRoomCreateReply) {}
+  rpc ClassRoomActionUpdate (ClassRoomEntity) returns (ClassRoomCreateReply) {}
+
+  rpc ClassRoomActionQuery (QueryFilterRequest) returns (ClassRoomQueryReply) {}
+  rpc ClassRoomActionGetOne (QueryFilterRequest) returns (ClassRoomReply) {}
+  rpc ClassRoomActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ClassRoomCreateReply {
+	ClassRoomEntity data  = 1;
+	IError error = 2;
+}
+
+message ClassRoomReply {
+	ClassRoomEntity data = 1;
+	IError error = 2;
+}
+
+message ClassRoomQueryReply {
+	repeated ClassRoomEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+;
+
+
+
+
+
+ 
+message ClassRoomEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string title = 8; // @tag(  yaml:"title"  )
+
+    optional string description = 9; // @tag(  yaml:"description" gorm:"text" )
+    optional string descriptionExcerpt = 10; // @tag( yaml:"descriptionExcerpt" gorm:"text" )
+
+  optional string accessLevel = 11; // @tag(  yaml:"accessLevel"  )
+
+  optional string provider = 12; // @tag(  yaml:"provider"  )
+
+  /* Many 2 many entities */
+  repeated string membersListId  = 14; // @tag(gorm:"-" sql:"-" yaml:"membersListId")
+  repeated UserEntity members = 15; // @tag(gorm:"many2many:classRoom_members;foreignKey:UniqueId;references:UniqueId" yaml:"members" fbtype:"many2many")
+
+  optional string meetUrl = 16; // @tag(  yaml:"meetUrl"  )
+
+  int64 rank = 17; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 18; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 19; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 20; // @tag(sql:"-")
+  string updatedFormatted = 21; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service Courses {
+  rpc CourseActionCreate (CourseEntity) returns (CourseCreateReply) {}
+  rpc CourseActionUpdate (CourseEntity) returns (CourseCreateReply) {}
+
+  rpc CourseActionQuery (QueryFilterRequest) returns (CourseQueryReply) {}
+  rpc CourseActionGetOne (QueryFilterRequest) returns (CourseReply) {}
+  rpc CourseActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message CourseCreateReply {
+	CourseEntity data  = 1;
+	IError error = 2;
+}
+
+message CourseReply {
+	CourseEntity data = 1;
+	IError error = 2;
+}
+
+message CourseQueryReply {
+	repeated CourseEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+;
+
+
+
+
+
+ 
+message CourseEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string introVideoUrl = 8; // @tag(  yaml:"introVideoUrl"  )
+
+  /* Many 2 many entities */
+  repeated string attachmentsListId  = 10; // @tag(gorm:"-" sql:"-" yaml:"attachmentsListId")
+  repeated FileEntity attachments = 11; // @tag(gorm:"many2many:course_attachments;foreignKey:UniqueId;references:UniqueId" yaml:"attachments" fbtype:"many2many")
+
+  optional string images = 12; // @tag(  yaml:"images"  )
+
+  optional string title = 13; // @tag(  yaml:"title"  )
+
+    optional string description = 14; // @tag(  yaml:"description" gorm:"text" )
+    optional string descriptionExcerpt = 15; // @tag( yaml:"descriptionExcerpt" gorm:"text" )
+
+    optional string excerpt = 16; // @tag(  yaml:"excerpt" gorm:"text" )
+    optional string excerptExcerpt = 17; // @tag( yaml:"excerptExcerpt" gorm:"text" )
+
+  optional int64 duration = 18; // @tag(  yaml:"duration"  )
+
+  int64 rank = 19; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 20; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 21; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 22; // @tag(sql:"-")
+  string updatedFormatted = 23; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service CourseEnrollments {
+  rpc CourseEnrollmentActionCreate (CourseEnrollmentEntity) returns (CourseEnrollmentCreateReply) {}
+  rpc CourseEnrollmentActionUpdate (CourseEnrollmentEntity) returns (CourseEnrollmentCreateReply) {}
+
+  rpc CourseEnrollmentActionQuery (QueryFilterRequest) returns (CourseEnrollmentQueryReply) {}
+  rpc CourseEnrollmentActionGetOne (QueryFilterRequest) returns (CourseEnrollmentReply) {}
+  rpc CourseEnrollmentActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message CourseEnrollmentCreateReply {
+	CourseEnrollmentEntity data  = 1;
+	IError error = 2;
+}
+
+message CourseEnrollmentReply {
+	CourseEnrollmentEntity data = 1;
+	IError error = 2;
+}
+
+message CourseEnrollmentQueryReply {
+	repeated CourseEnrollmentEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+;
+
+
+
+
+
+ 
+message CourseEnrollmentEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string courseId  = 9; // @tag(yaml:"courseId" )
+  CourseEntity course = 10; // @tag(gorm:"foreignKey:CourseId;references:UniqueId" json:"course" yaml:"course" fbtype:"one")
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated CourseEnrollmentUnitProgressEntity unitProgresses = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"unitProgresses")*/
+  repeated CourseEnrollmentUnitProgressEntity unitProgresses = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"unitProgresses" fbtype:"array")
+
+  int64 rank = 12; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 13; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 14; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 15; // @tag(sql:"-")
+  string updatedFormatted = 16; // @tag(sql:"-")
+}
+
+
+
+
+  
+
+ 
+message CourseEnrollmentUnitProgressEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string unitId  = 9; // @tag(yaml:"unitId" )
+  UnitEntity unit = 10; // @tag(gorm:"foreignKey:UnitId;references:UniqueId" json:"unit" yaml:"unit" fbtype:"one")
+
+  optional int64 progress = 11; // @tag(  yaml:"progress"  )
+
+  int64 rank = 12; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 13; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 14; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 15; // @tag(sql:"-")
+  string updatedFormatted = 16; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service Exams {
+  rpc ExamActionCreate (ExamEntity) returns (ExamCreateReply) {}
+  rpc ExamActionUpdate (ExamEntity) returns (ExamCreateReply) {}
+
+  rpc ExamActionQuery (QueryFilterRequest) returns (ExamQueryReply) {}
+  rpc ExamActionGetOne (QueryFilterRequest) returns (ExamReply) {}
+  rpc ExamActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ExamCreateReply {
+	ExamEntity data  = 1;
+	IError error = 2;
+}
+
+message ExamReply {
+	ExamEntity data = 1;
+	IError error = 2;
+}
+
+message ExamQueryReply {
+	repeated ExamEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+;
+
+;
+
+
+
+
+
+ 
+message ExamEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string format = 8; // @tag(  yaml:"format"  )
+
+    optional string title = 9; // @tag(  yaml:"title" gorm:"text" )
+    optional string titleExcerpt = 10; // @tag( yaml:"titleExcerpt" gorm:"text" )
+
+  optional int64 revision = 11; // @tag(  yaml:"revision"  )
+
+    optional string description = 12; // @tag(  yaml:"description" gorm:"text" )
+    optional string descriptionExcerpt = 13; // @tag( yaml:"descriptionExcerpt" gorm:"text" )
+
+  /* Many 2 many entities */
+  repeated string sectionsListId  = 15; // @tag(gorm:"-" sql:"-" yaml:"sectionsListId")
+  repeated AcSectionEntity sections = 16; // @tag(gorm:"many2many:exam_sections;foreignKey:UniqueId;references:UniqueId" yaml:"sections" fbtype:"many2many")
+
+  /* Many 2 many entities */
+  repeated string attachmentsListId  = 18; // @tag(gorm:"-" sql:"-" yaml:"attachmentsListId")
+  repeated FileEntity attachments = 19; // @tag(gorm:"many2many:exam_attachments;foreignKey:UniqueId;references:UniqueId" yaml:"attachments" fbtype:"many2many")
+
+  int64 rank = 20; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 21; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 22; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 23; // @tag(sql:"-")
+  string updatedFormatted = 24; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service ExamSessions {
+  rpc ExamSessionActionCreate (ExamSessionEntity) returns (ExamSessionCreateReply) {}
+  rpc ExamSessionActionUpdate (ExamSessionEntity) returns (ExamSessionCreateReply) {}
+
+  rpc ExamSessionActionQuery (QueryFilterRequest) returns (ExamSessionQueryReply) {}
+  rpc ExamSessionActionGetOne (QueryFilterRequest) returns (ExamSessionReply) {}
+  rpc ExamSessionActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ExamSessionCreateReply {
+	ExamSessionEntity data  = 1;
+	IError error = 2;
+}
+
+message ExamSessionReply {
+	ExamSessionEntity data = 1;
+	IError error = 2;
+}
+
+message ExamSessionQueryReply {
+	repeated ExamSessionEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+;
+
+
+
+
+
+ 
+message ExamSessionEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string sourceExamId  = 9; // @tag(yaml:"sourceExamId" )
+  ExamEntity sourceExam = 10; // @tag(gorm:"foreignKey:SourceExamId;references:UniqueId" json:"sourceExam" yaml:"sourceExam" fbtype:"one")
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated ExamSessionResultEntity results = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"results")*/
+  repeated ExamSessionResultEntity results = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"results" fbtype:"array")
+
+  int64 rank = 12; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 13; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 14; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 15; // @tag(sql:"-")
+  string updatedFormatted = 16; // @tag(sql:"-")
+}
+
+
+
+
+  
+
+ 
+message ExamSessionResultEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string questionId  = 9; // @tag(yaml:"questionId" )
+  QuestionEntity question = 10; // @tag(gorm:"foreignKey:QuestionId;references:UniqueId" json:"question" yaml:"question" fbtype:"one")
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated ExamSessionResultChoicesEntity choices = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"choices")*/
+  repeated ExamSessionResultChoicesEntity choices = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"choices" fbtype:"array")
+
+  int64 rank = 12; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 13; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 14; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 15; // @tag(sql:"-")
+  string updatedFormatted = 16; // @tag(sql:"-")
+}
+
+
+
+
+  
+
+ 
+message ExamSessionResultChoicesEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+    optional string content = 8; // @tag(  yaml:"content" gorm:"text" )
+    optional string contentExcerpt = 9; // @tag( yaml:"contentExcerpt" gorm:"text" )
+
+  /* One 2 one to external entity */
+  optional string choiceId  = 11; // @tag(yaml:"choiceId" )
+  QuestionChoicesEntity choice = 12; // @tag(gorm:"foreignKey:ChoiceId;references:UniqueId" json:"choice" yaml:"choice" fbtype:"one")
+
+  int64 rank = 13; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 14; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 15; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 16; // @tag(sql:"-")
+  string updatedFormatted = 17; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+message ExamSessionProgressDto {
+  optional string examSessionId  = 1; // @tag(yaml:"examSessionId")
+  ExamSessionEntity examSession = 2; // @tag(gorm:"foreignKey:ExamSessionId;references:UniqueId" json:"examSession" yaml:"examSession")
+  float progressPercentage = 3;
+  int64 correctAnswers = 4;
+  int64 wrongAnswers = 5;
+  int64 remainingQuestions = 6;
+  int64 examTotalQuestions = 7;
+  int64 userFilledQuestions = 8;
+}
+
+message ExamSessionStatQueryResult {
+  int64 itemsCount = 1;  // @tag(gorm:"items_count")
+  string sectionUniqueId  = 2; // @tag(gorm:"section_unique_id")
+  string sessionUniqueId  = 6; // @tag(gorm:"session_unique_id")
+  string examUniqueId  = 7; // @tag(gorm:"exam_unique_id")
+  string examTitle = 8; // @tag(gorm:"exam_title")
+  string sectionTitle     = 3; // @tag(gorm:"section_title")
+  string statGroup        = 4;// @tag(gorm:"stat_group")
+  string uniqueGroupIdentifier        = 5;// @tag(gorm:"unique_group_identifier")
+}
+
+message CommonCEFRSectionProgressDto {
+  int64 listenningTotalQuestions = 1; // @tag(json:"listenningTotalQuestions")
+  int64 listenningAnsweredQuestions = 2; // @tag(json:"listenningAnsweredQuestions")
+  int64 grammarTotalQuestions = 3; // @tag(json:"grammarTotalQuestions")
+  int64 grammarAnsweredQuestions = 4; // @tag(json:"grammarAnsweredQuestions")
+  int64 writingTotalQuestions = 5; // @tag(json:"writingTotalQuestions")
+  int64 writingAnsweredQuestions = 6; // @tag(json:"writingAnsweredQuestions")
+  int64 readingTotalQuestions = 7; // @tag(json:"readingTotalQuestions")
+  int64 readingAnsweredQuestions = 8; // @tag(json:"readingAnsweredQuestions")
+  int64 speakingTotalQuestions = 9; // @tag(json:"speakingTotalQuestions")
+  int64 speakingAnsweredQuestions = 10; // @tag(json:"speakingAnsweredQuestions")
+  double listeningProgress = 11;
+  double grammarProgress = 12;
+  double writingProgress = 13;
+  double readingProgress = 14;
+  double speakingProgress = 15;
+  string examUniqueId = 16;
+  string listeningProgressString = 18;
+  string grammarProgressString = 19;
+  string writingProgressString = 20;
+  string readingProgressString = 21;
+  string speakingProgressString = 22;
+  string sessionUniqueId = 17;
+  string examTitle = 23;
+}
+ 
+
+
+
+  
+
+  
+
+  
+      
+service ExamSessionReviews {
+  rpc ExamSessionReviewActionCreate (ExamSessionReviewEntity) returns (ExamSessionReviewCreateReply) {}
+  rpc ExamSessionReviewActionUpdate (ExamSessionReviewEntity) returns (ExamSessionReviewCreateReply) {}
+
+  rpc ExamSessionReviewActionQuery (QueryFilterRequest) returns (ExamSessionReviewQueryReply) {}
+  rpc ExamSessionReviewActionGetOne (QueryFilterRequest) returns (ExamSessionReviewReply) {}
+  rpc ExamSessionReviewActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ExamSessionReviewCreateReply {
+	ExamSessionReviewEntity data  = 1;
+	IError error = 2;
+}
+
+message ExamSessionReviewReply {
+	ExamSessionReviewEntity data = 1;
+	IError error = 2;
+}
+
+message ExamSessionReviewQueryReply {
+	repeated ExamSessionReviewEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+
+
+
+ 
+message ExamSessionReviewEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string choiceId  = 9; // @tag(yaml:"choiceId" validate:"required")
+  ExamSessionResultChoicesEntity choice = 10; // @tag(gorm:"foreignKey:ChoiceId;references:UniqueId" json:"choice" yaml:"choice" fbtype:"one")
+
+  optional int64 accepted = 11; // @tag( validate:"required" yaml:"accepted"  )
+
+  /* One 2 one to external entity */
+  optional string sessionId  = 13; // @tag(yaml:"sessionId" validate:"required")
+  ExamSessionEntity session = 14; // @tag(gorm:"foreignKey:SessionId;references:UniqueId" json:"session" yaml:"session" fbtype:"one")
+
+  int64 rank = 15; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 16; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 17; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 18; // @tag(sql:"-")
+  string updatedFormatted = 19; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service QuestionBanks {
+  rpc QuestionBankActionCreate (QuestionBankEntity) returns (QuestionBankCreateReply) {}
+  rpc QuestionBankActionUpdate (QuestionBankEntity) returns (QuestionBankCreateReply) {}
+
+  rpc QuestionBankActionQuery (QueryFilterRequest) returns (QuestionBankQueryReply) {}
+  rpc QuestionBankActionGetOne (QueryFilterRequest) returns (QuestionBankReply) {}
+  rpc QuestionBankActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message QuestionBankCreateReply {
+	QuestionBankEntity data  = 1;
+	IError error = 2;
+}
+
+message QuestionBankReply {
+	QuestionBankEntity data = 1;
+	IError error = 2;
+}
+
+message QuestionBankQueryReply {
+	repeated QuestionBankEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message QuestionBankEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated QuestionBankEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string title = 9; // @tag(translate:"true" validate:"required,omitempty,min=1" yaml:"title"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message QuestionBankEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string title = 3; // @tag(yaml:"title" json:"title");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service Questions {
+  rpc QuestionActionCreate (QuestionEntity) returns (QuestionCreateReply) {}
+  rpc QuestionActionUpdate (QuestionEntity) returns (QuestionCreateReply) {}
+
+  rpc QuestionActionQuery (QueryFilterRequest) returns (QuestionQueryReply) {}
+  rpc QuestionActionGetOne (QueryFilterRequest) returns (QuestionReply) {}
+  rpc QuestionActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message QuestionCreateReply {
+	QuestionEntity data  = 1;
+	IError error = 2;
+}
+
+message QuestionReply {
+	QuestionEntity data = 1;
+	IError error = 2;
+}
+
+message QuestionQueryReply {
+	repeated QuestionEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+;
+
+;
+
+;
+
+;
+
+;
+
+
+;
+
+
+
+
+
+ 
+message QuestionEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string bankId  = 9; // @tag(yaml:"bankId" )
+  QuestionBankEntity bank = 10; // @tag(gorm:"foreignKey:BankId;references:UniqueId" json:"bank" yaml:"bank" fbtype:"one")
+
+  optional int64 wordCount = 11; // @tag(  yaml:"wordCount"  )
+
+  optional int64 isPreview = 12; // @tag(  yaml:"isPreview"  )
+
+  optional int64 durationInSeconds = 13; // @tag(  yaml:"durationInSeconds"  )
+
+  optional int64 isCorrect = 14; // @tag(  yaml:"isCorrect"  )
+
+    optional string title = 15; // @tag(  yaml:"title" gorm:"text" )
+    optional string titleExcerpt = 16; // @tag( yaml:"titleExcerpt" gorm:"text" )
+
+    optional string body = 17; // @tag(  yaml:"body" gorm:"text" )
+    optional string bodyExcerpt = 18; // @tag( yaml:"bodyExcerpt" gorm:"text" )
+
+  /* Many 2 many entities */
+  repeated string provincesListId  = 20; // @tag(gorm:"-" sql:"-" yaml:"provincesListId")
+  repeated GeoProvinceEntity provinces = 21; // @tag(gorm:"many2many:question_provinces;foreignKey:UniqueId;references:UniqueId" yaml:"provinces" fbtype:"many2many")
+
+  /* One 2 one to external entity */
+  optional string questionLevelId  = 23; // @tag(yaml:"questionLevelId" )
+  QuestionLevelEntity questionLevel = 24; // @tag(gorm:"foreignKey:QuestionLevelId;references:UniqueId" json:"questionLevel" yaml:"questionLevel" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string studyYearId  = 26; // @tag(yaml:"studyYearId" )
+  StudyYearEntity studyYear = 27; // @tag(gorm:"foreignKey:StudyYearId;references:UniqueId" json:"studyYear" yaml:"studyYear" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string schoolTypeId  = 29; // @tag(yaml:"schoolTypeId" )
+  SchoolTypeEntity schoolType = 30; // @tag(gorm:"foreignKey:SchoolTypeId;references:UniqueId" json:"schoolType" yaml:"schoolType" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string questionSemesterId  = 32; // @tag(yaml:"questionSemesterId" )
+  QuestionSemesterEntity questionSemester = 33; // @tag(gorm:"foreignKey:QuestionSemesterId;references:UniqueId" json:"questionSemester" yaml:"questionSemester" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string questionDifficulityLevelId  = 35; // @tag(yaml:"questionDifficulityLevelId" )
+  QuestionDifficulityLevelEntity questionDifficulityLevel = 36; // @tag(gorm:"foreignKey:QuestionDifficulityLevelId;references:UniqueId" json:"questionDifficulityLevel" yaml:"questionDifficulityLevel" fbtype:"one")
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated QuestionChoicesEntity choices = 37; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"choices")*/
+  repeated QuestionChoicesEntity choices = 37; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"choices" fbtype:"array")
+
+  int64 rank = 38; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 39; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 40; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 41; // @tag(sql:"-")
+  string updatedFormatted = 42; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+ 
+message QuestionChoicesEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+    optional string content = 8; // @tag(  yaml:"content" gorm:"text" )
+    optional string contentExcerpt = 9; // @tag( yaml:"contentExcerpt" gorm:"text" )
+
+  optional string correctAnswer = 10; // @tag(  yaml:"correctAnswer"  )
+
+  optional int64 isCorrect = 11; // @tag(  yaml:"isCorrect"  )
+
+  optional int64 isPreview = 12; // @tag(  yaml:"isPreview"  )
+
+  int64 rank = 13; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 14; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 15; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 16; // @tag(sql:"-")
+  string updatedFormatted = 17; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service QuestionDifficulityLevels {
+  rpc QuestionDifficulityLevelActionCreate (QuestionDifficulityLevelEntity) returns (QuestionDifficulityLevelCreateReply) {}
+  rpc QuestionDifficulityLevelActionUpdate (QuestionDifficulityLevelEntity) returns (QuestionDifficulityLevelCreateReply) {}
+
+  rpc QuestionDifficulityLevelActionQuery (QueryFilterRequest) returns (QuestionDifficulityLevelQueryReply) {}
+  rpc QuestionDifficulityLevelActionGetOne (QueryFilterRequest) returns (QuestionDifficulityLevelReply) {}
+  rpc QuestionDifficulityLevelActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message QuestionDifficulityLevelCreateReply {
+	QuestionDifficulityLevelEntity data  = 1;
+	IError error = 2;
+}
+
+message QuestionDifficulityLevelReply {
+	QuestionDifficulityLevelEntity data = 1;
+	IError error = 2;
+}
+
+message QuestionDifficulityLevelQueryReply {
+	repeated QuestionDifficulityLevelEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message QuestionDifficulityLevelEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated QuestionDifficulityLevelEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message QuestionDifficulityLevelEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service QuestionLevels {
+  rpc QuestionLevelActionCreate (QuestionLevelEntity) returns (QuestionLevelCreateReply) {}
+  rpc QuestionLevelActionUpdate (QuestionLevelEntity) returns (QuestionLevelCreateReply) {}
+
+  rpc QuestionLevelActionQuery (QueryFilterRequest) returns (QuestionLevelQueryReply) {}
+  rpc QuestionLevelActionGetOne (QueryFilterRequest) returns (QuestionLevelReply) {}
+  rpc QuestionLevelActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message QuestionLevelCreateReply {
+	QuestionLevelEntity data  = 1;
+	IError error = 2;
+}
+
+message QuestionLevelReply {
+	QuestionLevelEntity data = 1;
+	IError error = 2;
+}
+
+message QuestionLevelQueryReply {
+	repeated QuestionLevelEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message QuestionLevelEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated QuestionLevelEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message QuestionLevelEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service QuestionSemesters {
+  rpc QuestionSemesterActionCreate (QuestionSemesterEntity) returns (QuestionSemesterCreateReply) {}
+  rpc QuestionSemesterActionUpdate (QuestionSemesterEntity) returns (QuestionSemesterCreateReply) {}
+
+  rpc QuestionSemesterActionQuery (QueryFilterRequest) returns (QuestionSemesterQueryReply) {}
+  rpc QuestionSemesterActionGetOne (QueryFilterRequest) returns (QuestionSemesterReply) {}
+  rpc QuestionSemesterActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message QuestionSemesterCreateReply {
+	QuestionSemesterEntity data  = 1;
+	IError error = 2;
+}
+
+message QuestionSemesterReply {
+	QuestionSemesterEntity data = 1;
+	IError error = 2;
+}
+
+message QuestionSemesterQueryReply {
+	repeated QuestionSemesterEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message QuestionSemesterEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated QuestionSemesterEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message QuestionSemesterEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service Quizs {
+  rpc QuizActionCreate (QuizEntity) returns (QuizCreateReply) {}
+  rpc QuizActionUpdate (QuizEntity) returns (QuizCreateReply) {}
+
+  rpc QuizActionQuery (QueryFilterRequest) returns (QuizQueryReply) {}
+  rpc QuizActionGetOne (QueryFilterRequest) returns (QuizReply) {}
+  rpc QuizActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message QuizCreateReply {
+	QuizEntity data  = 1;
+	IError error = 2;
+}
+
+message QuizReply {
+	QuizEntity data = 1;
+	IError error = 2;
+}
+
+message QuizQueryReply {
+	repeated QuizEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+
+
+
+ 
+message QuizEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string title = 8; // @tag(  yaml:"title"  )
+
+    optional string description = 9; // @tag(  yaml:"description" gorm:"text" )
+    optional string descriptionExcerpt = 10; // @tag( yaml:"descriptionExcerpt" gorm:"text" )
+
+  /* Many 2 many entities */
+  repeated string questionsListId  = 12; // @tag(gorm:"-" sql:"-" yaml:"questionsListId")
+  repeated QuestionEntity questions = 13; // @tag(gorm:"many2many:quiz_questions;foreignKey:UniqueId;references:UniqueId" yaml:"questions" fbtype:"many2many")
+
+  int64 rank = 14; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 15; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 16; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 17; // @tag(sql:"-")
+  string updatedFormatted = 18; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service SchoolTypes {
+  rpc SchoolTypeActionCreate (SchoolTypeEntity) returns (SchoolTypeCreateReply) {}
+  rpc SchoolTypeActionUpdate (SchoolTypeEntity) returns (SchoolTypeCreateReply) {}
+
+  rpc SchoolTypeActionQuery (QueryFilterRequest) returns (SchoolTypeQueryReply) {}
+  rpc SchoolTypeActionGetOne (QueryFilterRequest) returns (SchoolTypeReply) {}
+  rpc SchoolTypeActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message SchoolTypeCreateReply {
+	SchoolTypeEntity data  = 1;
+	IError error = 2;
+}
+
+message SchoolTypeReply {
+	SchoolTypeEntity data = 1;
+	IError error = 2;
+}
+
+message SchoolTypeQueryReply {
+	repeated SchoolTypeEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message SchoolTypeEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated SchoolTypeEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message SchoolTypeEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service StudyYears {
+  rpc StudyYearActionCreate (StudyYearEntity) returns (StudyYearCreateReply) {}
+  rpc StudyYearActionUpdate (StudyYearEntity) returns (StudyYearCreateReply) {}
+
+  rpc StudyYearActionQuery (QueryFilterRequest) returns (StudyYearQueryReply) {}
+  rpc StudyYearActionGetOne (QueryFilterRequest) returns (StudyYearReply) {}
+  rpc StudyYearActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message StudyYearCreateReply {
+	StudyYearEntity data  = 1;
+	IError error = 2;
+}
+
+message StudyYearReply {
+	StudyYearEntity data = 1;
+	IError error = 2;
+}
+
+message StudyYearQueryReply {
+	repeated StudyYearEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message StudyYearEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated StudyYearEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message StudyYearEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service Units {
+  rpc UnitActionCreate (UnitEntity) returns (UnitCreateReply) {}
+  rpc UnitActionUpdate (UnitEntity) returns (UnitCreateReply) {}
+
+  rpc UnitActionQuery (QueryFilterRequest) returns (UnitQueryReply) {}
+  rpc UnitActionGetOne (QueryFilterRequest) returns (UnitReply) {}
+  rpc UnitActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message UnitCreateReply {
+	UnitEntity data  = 1;
+	IError error = 2;
+}
+
+message UnitReply {
+	UnitEntity data = 1;
+	IError error = 2;
+}
+
+message UnitQueryReply {
+	repeated UnitEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+
+
+
+ 
+message UnitEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string courseId  = 9; // @tag(yaml:"courseId" )
+  CourseEntity course = 10; // @tag(gorm:"foreignKey:CourseId;references:UniqueId" json:"course" yaml:"course" fbtype:"one")
+
+  optional string title = 11; // @tag(  yaml:"title"  )
+
+    optional string content = 12; // @tag(  yaml:"content" gorm:"text" )
+    optional string contentExcerpt = 13; // @tag( yaml:"contentExcerpt" gorm:"text" )
+
+  int64 rank = 14; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 15; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 16; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 17; // @tag(sql:"-")
+  string updatedFormatted = 18; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+message HierarchyRecord {
+	string linkerId = 1;
+	string uniqueId = 2;
+}
+      
+message HierarchyUpdateDto {
+	repeated HierarchyRecord records = 1;
+}
+
+

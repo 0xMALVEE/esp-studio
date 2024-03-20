@@ -1,0 +1,56 @@
+@import "../themes/apple-family/theme-mac-variables.scss";
+
+.answer-content-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+
+  .answer-row-tools {
+    width: 50px;
+    text-align: center;
+    margin-left: 20px;
+
+    .drag-btn,
+    .delete-btn {
+      border: none;
+      text-align: center;
+      width: 40px;
+      margin: 5px auto;
+      height: 40px;
+      border-radius: 50%;
+      img {
+        margin: auto;
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+  .answer-content-input {
+    flex: 1;
+  }
+}
+
+.answer-add {
+  background-color: $sidebargrey;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+body {
+  &:not(.light-theme) {
+    @media (prefers-color-scheme: dark) {
+      .answer-add {
+        background-color: #615956;
+      }
+    }
+  }
+
+  // Now force the dark mode as well.
+  &.dark-theme {
+    .answer-add {
+      background-color: #615956;
+    }
+  }
+}

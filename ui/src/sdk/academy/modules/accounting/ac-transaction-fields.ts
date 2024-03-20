@@ -1,0 +1,46 @@
+/**
+ * Fields for entity. Use this when creating forms in React/Angular,
+ * instead of giving string to each one, use it from here, so in case of
+ * updating any fields you don't loose it.
+ */
+
+export const AcTransactionEntityFields = {
+  visibility: "visibility",
+  workspaceId: "workspaceId",
+  linkerId: "linkerId",
+  parentId: "parentId",
+  uniqueId: "uniqueId",
+  userId: "userId",
+  title: "title",
+  attachmentsListId: "attachmentsListId",
+  attachments: "attachments",
+  name: "name",
+  transactionDate: "transactionDate",
+  settlementDate: "settlementDate",
+  correspondence: "correspondence",
+  correspondenceAccount: "correspondenceAccount",
+  amount: "amount",
+  summary: "summary",
+  accountId: "accountId",
+  account: {
+    visibility: "account.visibility",
+    workspaceId: "account.workspaceId",
+    linkerId: "account.linkerId",
+    parentId: "account.parentId",
+    uniqueId: "account.uniqueId",
+    userId: "account.userId",
+    currency: "account.currency",
+    name: "account.name",
+    rank: "account.rank",
+    updated: "account.updated",
+    created: "account.created",
+    createdFormatted: "account.createdFormatted",
+    updatedFormatted: "account.updatedFormatted",
+  },
+  account$: "account",
+  rank: "rank",
+  updated: "updated",
+  created: "created",
+  createdFormatted: "createdFormatted",
+  updatedFormatted: "updatedFormatted",
+};

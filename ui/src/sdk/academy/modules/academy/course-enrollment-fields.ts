@@ -1,0 +1,45 @@
+/**
+ * Fields for entity. Use this when creating forms in React/Angular,
+ * instead of giving string to each one, use it from here, so in case of
+ * updating any fields you don't loose it.
+ */
+
+export const CourseEnrollmentEntityFields = {
+  visibility: "visibility",
+  workspaceId: "workspaceId",
+  linkerId: "linkerId",
+  parentId: "parentId",
+  uniqueId: "uniqueId",
+  userId: "userId",
+  courseId: "courseId",
+  course: {
+    visibility: "course.visibility",
+    workspaceId: "course.workspaceId",
+    linkerId: "course.linkerId",
+    parentId: "course.parentId",
+    uniqueId: "course.uniqueId",
+    userId: "course.userId",
+    introVideoUrl: "course.introVideoUrl",
+    attachmentsListId: "course.attachmentsListId",
+    attachments: "course.attachments",
+    images: "course.images",
+    title: "course.title",
+    description: "course.description",
+    descriptionExcerpt: "course.descriptionExcerpt",
+    excerpt: "course.excerpt",
+    excerptExcerpt: "course.excerptExcerpt",
+    duration: "course.duration",
+    rank: "course.rank",
+    updated: "course.updated",
+    created: "course.created",
+    createdFormatted: "course.createdFormatted",
+    updatedFormatted: "course.updatedFormatted",
+  },
+  course$: "course",
+  unitProgresses: "unitProgresses",
+  rank: "rank",
+  updated: "updated",
+  created: "created",
+  createdFormatted: "createdFormatted",
+  updatedFormatted: "updatedFormatted",
+};

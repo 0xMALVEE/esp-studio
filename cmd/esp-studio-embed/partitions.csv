@@ -1,0 +1,23 @@
+# Name,   Type, SubType, Offset,  Size, Flags
+# Works with HTTp
+#nvs,      data, nvs,     0x9000,  0x6000,
+#phy_init, data, phy,     0xf000,  0x1000,
+#factory,  app,  factory, 0x10000, 0x177000,
+#dist,      data, spiffs,  ,        0xFA000,
+
+
+# Name,   Type, SubType, Offset,  Size, Flags
+# Works with SQLITE
+#nvs,      data, nvs,     0x9000,  0x6000,
+#phy_init, data, phy,     0xf000,  0x1000,
+#factory,  app,  factory, 0x10000, 2M,
+#storage,  data, spiffs,  ,        0x7D000, 
+#dist,      data, spiffs,  ,        0xFA000,
+
+
+
+nvs,      data, nvs,     0x9000,  0x6000,
+phy_init, data, phy,     0xf000,  0x1000,
+factory,  app,  factory, 0x10000, 0x1F4000,
+webdata,      data, spiffs,  ,        0xFA000,
+storage,  data, spiffs,  ,        0xFA000, 

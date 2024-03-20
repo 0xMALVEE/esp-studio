@@ -1,0 +1,17 @@
+- uniqueId: "Task 1"
+  userId: null
+  name: "Task 1"
+  translations:
+    - languageId: fa
+      name: تسک ۱
+  modbusId: 18
+  deviceId: device_modbus
+  connectionTypeId: tcp
+  functionCodeId: '5'
+  register: 10
+  writeInterval: 100
+  readInterval: 50
+  range: 55
+  length: 2
+  variableTypeId: integer
+  

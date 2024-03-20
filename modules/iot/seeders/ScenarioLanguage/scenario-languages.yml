@@ -1,0 +1,21 @@
+- uniqueId: lua
+  visibility: A
+  name: Lua Scripting Language
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: زبان کدنویسی لوا (LUA)
+- uniqueId: c
+  visibility: A
+  name: C Programming Language
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: زبان کدنویسی سی (C)
+- uniqueId: lammer
+  visibility: A
+  name: Lammer Sequence Language
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: دستورالعمل Lammer

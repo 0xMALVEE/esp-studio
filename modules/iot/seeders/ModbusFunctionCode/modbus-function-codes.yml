@@ -1,0 +1,103 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: '2'
+  name: Read Discrete Inputs
+  code: 2
+
+- visibility: A
+  workspaceId: system
+  uniqueId: '1'
+  name: Read Coils
+  code: 
+- visibility: A
+  workspaceId: system
+  uniqueId: '5'
+  name: Write Single Coil
+  code: 5
+
+- visibility: A
+  workspaceId: system
+  uniqueId: '15'
+  name: Write Multiple Coils
+  code: 15
+
+- visibility: A
+  workspaceId: system
+  uniqueId: '4'
+  name: Read Input Registers
+  code: 4
+- visibility: A
+  workspaceId: system
+  uniqueId: '3'
+  name: Read Multiple Holding Registers	
+  code: 3
+- visibility: A
+  workspaceId: system
+  uniqueId: '6'
+  name: Write Single Holding Register
+  code: 6
+- visibility: A
+  workspaceId: system
+  uniqueId: '16'
+  name: Write Multiple Holding Registers
+  code: 16
+- visibility: A
+  workspaceId: system
+  uniqueId: '23'
+  name: Read/Write Multiple Registers	
+  code: 23
+- visibility: A
+  workspaceId: system
+  uniqueId: '22'
+  name: Mask Write Register	
+  code: 22
+- visibility: A
+  workspaceId: system
+  uniqueId: '24'
+  name: Read FIFO Queue	
+  code: 24
+- visibility: A
+  workspaceId: system
+  uniqueId: '20'
+  name: Read File Record	
+  code: 20
+- visibility: A
+  workspaceId: system
+  uniqueId: '21'
+  name: Write File Record	
+  code: 21
+- visibility: A
+  workspaceId: system
+  uniqueId: '7'
+  name: Read Exception Status	
+  code: 7
+- visibility: A
+  workspaceId: system
+  uniqueId: '8'
+  name: Diagnostic
+  code: 8
+- visibility: A
+  workspaceId: system
+  uniqueId: '11'
+  name: Get Com Event Counter	
+  code: 11
+- visibility: A
+  workspaceId: system
+  uniqueId: '12'
+  name: Get Com Event Log	
+  code: 12
+- visibility: A
+  workspaceId: system
+  uniqueId: '17'
+  name: Report Slave ID	
+  code: 17
+- visibility: A
+  workspaceId: system
+  uniqueId: '43'
+  name: Read Device Identification	
+  code: 43
+- visibility: A
+  workspaceId: system
+  uniqueId: '43'
+  name: Encapsulated Interface Transport	
+  code: 43

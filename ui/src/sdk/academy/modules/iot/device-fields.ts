@@ -1,0 +1,45 @@
+/**
+ * Fields for entity. Use this when creating forms in React/Angular,
+ * instead of giving string to each one, use it from here, so in case of
+ * updating any fields you don't loose it.
+ */
+
+export const DeviceEntityFields = {
+  visibility: "visibility",
+  workspaceId: "workspaceId",
+  linkerId: "linkerId",
+  parentId: "parentId",
+  uniqueId: "uniqueId",
+  userId: "userId",
+  translations: "translations",
+  name: "name",
+  model: "model",
+  ip: "ip",
+  wifiUser: "wifiUser",
+  wifiPassword: "wifiPassword",
+  securityType: "securityType",
+  typeId: "typeId",
+  type: {
+    visibility: "type.visibility",
+    workspaceId: "type.workspaceId",
+    linkerId: "type.linkerId",
+    parentId: "type.parentId",
+    uniqueId: "type.uniqueId",
+    userId: "type.userId",
+    translations: "type.translations",
+    name: "type.name",
+    rank: "type.rank",
+    updated: "type.updated",
+    created: "type.created",
+    createdFormatted: "type.createdFormatted",
+    updatedFormatted: "type.updatedFormatted",
+  },
+  type$: "type",
+  deviceModbusConfig: "deviceModbusConfig",
+  rank: "rank",
+  updated: "updated",
+  created: "created",
+  createdFormatted: "createdFormatted",
+  updatedFormatted: "updatedFormatted",
+  children: "children",
+};

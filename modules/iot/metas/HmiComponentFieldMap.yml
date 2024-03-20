@@ -1,0 +1,25 @@
+fieldTranslations:
+  layoutMode:
+    en: Layout Mode
+    fa: ''
+  type:
+    en: Type
+    fa: ''
+  label:
+    en: Label
+    fa: ''
+  icon:
+    en: Icon
+    fa: ''
+  read:
+    en: Read
+    fa: ''
+  write:
+    en: Write
+    fa: ''
+  position:
+    en: Position
+    fa: ''
+  states:
+    en: States
+    fa: ''

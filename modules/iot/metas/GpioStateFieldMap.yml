@@ -1,0 +1,16 @@
+fieldTranslations:
+  gpioMode:
+    en: Gpio Mode
+    fa: ''
+  gpioIndexSnapshot:
+    en: Gpio Index Snapshot
+    fa: ''
+  gpioModeSnapshot:
+    en: Gpio Mode Snapshot
+    fa: ''
+  gpioValueSnapshot:
+    en: Gpio Value Snapshot
+    fa: ''
+  gpio:
+    en: Gpio
+    fa: ''

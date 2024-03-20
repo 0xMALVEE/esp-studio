@@ -1,0 +1,16 @@
+@mixin exam-session-dark() {
+  .task-fill-in-blank-task {
+    .inline-select-choice-group {
+      background-color: #76707d;
+    }
+  }
+  .example-highlight,
+  .fill-in-from-list {
+    background-color: #1b1b1b !important;
+  }
+  .start-new-exam {
+    &.docked {
+      background-color: black;
+    }
+  }
+}

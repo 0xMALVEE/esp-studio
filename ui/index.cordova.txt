@@ -1,0 +1,79 @@
+I think this is not needed, just in case
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="theme-color" content="white" />
+    <meta name="msapplication-navbutton-color" content="white" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <meta
+      name="description"
+      content="AcademyX - E-Learning Platform for schools, individual learners and businesses."
+    />
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+    <title>Academy Platform</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      // Wait for device API libraries to load
+      //
+      function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+      }
+
+      // device APIs are available
+      //
+      function onDeviceReady() {
+        FirebackIPC.echo(
+          "PLY",
+          function (msg) {
+            document.getElementById("display").innerHTML = "okay" + msg;
+          },
+          function (err) {
+            document.getElementById("display").innerHTML = "err" + err;
+          }
+        );
+      }
+
+      function loadFont(name, url, weight) {
+        return new Promise((resolve, reject) => {
+          const myFont = new FontFace(name, `url(${url})`);
+          if (weight) myFont.weight = weight;
+          myFont
+            .load()
+            .then(() => {
+              document.fonts.add(myFont);
+              const el = document.createElement("DIV");
+              el.style.fontFamily = name;
+              resolve(true);
+            })
+            .catch((err) => {
+              console.log(err);
+              reject();
+            });
+        });
+      }
+
+      if ("%REACT_APP_SUPPORTED_LANGUAGES%".includes("fa")) {
+        loadFont("iransans", "%REACT_APP_PUBLIC_URL%fonts/irs/irs.ttf");
+      }
+    </script>
+  </head>
+  <body onLoad="onLoad()" class="mac-theme">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>

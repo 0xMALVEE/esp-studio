@@ -1,0 +1,14 @@
+- uniqueId: gpiovalue
+  visibility: A
+  name: GPIO Change
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: تغییر وضعیت پین (GPIO)
+- uniqueId: cronjob
+  visibility: A
+  name: Cronjob
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: براساس بازه های زمانی

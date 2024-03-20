@@ -1,0 +1,15 @@
+- uniqueId: "trigger"
+  name: "Time Trigger"
+  triggerTypeId: cronjob
+  triggerTypeCronjob:
+    expression: "* 2 8 5 2"
+- uniqueId: "gpiovalue"
+  name: "GPIO Trigger"
+  triggerTypeId: gpiovalue
+  triggerTypeGpioValue:
+    gpioId: ESP32_GPIO0
+    compareTypeId: moreThan
+    compareValueInt: 100
+    thresholdPrecentage: 10
+    beginHour: 1500
+    endHour: 1930

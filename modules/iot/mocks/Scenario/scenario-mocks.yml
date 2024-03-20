@@ -1,0 +1,27 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: "turnlightsoff"
+  userId: null
+  translations: 
+    - languageId: fa
+      name: خاموش کردن همه چراغ ها
+  name: "Turn Lights Off"
+  script:
+    content: -<
+      SET_GPIO_LOW(1);
+      SET_GPIO_LOW(2);
+      SET_GPIO_LOW(3);
+
+    scriptLanguageId: c
+- visibility: A
+  workspaceId: system
+  name: Garden Watering
+  uniqueId: "wateringtrees"
+  translations: 
+    - languageId: fa
+      name: آبیاری درختان
+  lammerSequences:
+  - operationType: sleep
+  - operationType: sleep
+  - operationType: notification
+    

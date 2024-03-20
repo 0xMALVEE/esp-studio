@@ -1,0 +1,45 @@
+/**
+ * Fields for entity. Use this when creating forms in React/Angular,
+ * instead of giving string to each one, use it from here, so in case of
+ * updating any fields you don't loose it.
+ */
+
+export const GeoProvinceEntityFields = {
+  visibility: "visibility",
+  workspaceId: "workspaceId",
+  linkerId: "linkerId",
+  parentId: "parentId",
+  parent: "parent",
+  parent$: "parent",
+  uniqueId: "uniqueId",
+  userId: "userId",
+  translations: "translations",
+  name: "name",
+  countryId: "countryId",
+  country: {
+    visibility: "country.visibility",
+    workspaceId: "country.workspaceId",
+    linkerId: "country.linkerId",
+    parentId: "country.parentId",
+    parent: "country.parent",
+    parent$: "parent",
+    uniqueId: "country.uniqueId",
+    userId: "country.userId",
+    translations: "country.translations",
+    status: "country.status",
+    flag: "country.flag",
+    commonName: "country.commonName",
+    officialName: "country.officialName",
+    rank: "country.rank",
+    updated: "country.updated",
+    created: "country.created",
+    createdFormatted: "country.createdFormatted",
+    updatedFormatted: "country.updatedFormatted",
+  },
+  country$: "country",
+  rank: "rank",
+  updated: "updated",
+  created: "created",
+  createdFormatted: "createdFormatted",
+  updatedFormatted: "updatedFormatted",
+};

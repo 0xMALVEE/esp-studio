@@ -1,0 +1,49 @@
+fieldTranslations:
+  ssl:
+    en: Ssl
+    fa: ''
+  autoReconnect:
+    en: Auto Reconnect
+    fa: ''
+  cleanSession:
+    en: Clean Session
+    fa: ''
+  lastWillRetain:
+    en: Last Will Retain
+    fa: ''
+  port:
+    en: Port
+    fa: ''
+  keepAlive:
+    en: Keep Alive
+    fa: ''
+  connectTimeout:
+    en: Connect Timeout
+    fa: ''
+  lastWillQos:
+    en: Last Will Qos
+    fa: ''
+  clientId:
+    en: Client Id
+    fa: ''
+  name:
+    en: Name
+    fa: ''
+  host:
+    en: Host
+    fa: ''
+  username:
+    en: Username
+    fa: ''
+  password:
+    en: Password
+    fa: ''
+  mqttVersion:
+    en: Mqtt Version
+    fa: ''
+  lastWillTopic:
+    en: Last Will Topic
+    fa: ''
+  lastWillPayload:
+    en: Last Will Payload
+    fa: ''

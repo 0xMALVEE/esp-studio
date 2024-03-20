@@ -1,0 +1,95 @@
+name: esp-studio
+workspaceAs: ""
+userAs: ""
+cliLanguage: ""
+cliRegion: ""
+selfHosted: false
+license:
+  macIdentifier: ""
+service:
+  macIdentifier: esp-studio
+  windowsIdentifier: esp-studio
+  DebianIdentifier: esp-studio
+log:
+  stderr: /tmp/fireback-err.log
+  stdout: /tmp/fireback-out.log
+publicServer:
+  enabled: true
+  port: "61901"
+  grpcPort: "4502"
+  host: localhost
+backOfficeServer:
+  enabled: false
+  port: "4501"
+  host: localhost
+mqtt:
+  name: ""
+  clientId: ""
+  host: ""
+  username: ""
+  password: ""
+  mqttVersion: "3.1"
+  lastWillTopic: ""
+  lastWillPayload: ""
+  port: 0
+  keepAlive: 60
+  connectTimeout: 10
+  lastWillQos: 0
+  ssl: false
+  autoReconnect: false
+  cleanSession: true
+  lastWillRetain: false
+database:
+  username: ""
+  port: ""
+  host: ""
+  password: ""
+  database: /Users/ali/work/products/esp-studio/esp-studio-database.db
+  vendor: sqlite
+  dsn: ""
+mailServer:
+  provider: ""
+  apiKey: ""
+  senderName: ""
+  senderAddress: ""
+development:
+  forwardMails: ""
+  forwardMailsName: ""
+gin:
+  mode: production
+phoneNumberTemplates:
+  loginSms:
+    enabled: false
+    subject: ""
+    templateFile: ""
+mailTemplates:
+  confirmMail:
+    enabled: false
+    subject: ""
+    templateFile: ""
+  forgetPasswordRequest:
+    enabled: false
+    subject: ""
+    templateFile: ""
+  acceptWorkspaceInvitation:
+    enabled: false
+    subject: ""
+    templateFile: ""
+smartUI:
+  enabled: true
+  redirectOnSuccess: /auth?exchangeKey=%exchangeKey%
+  homeUrl: ""
+authentication:
+  google:
+    googleSigninEnabled: false
+    googleSigninClientId: ""
+    apiKey: ""
+headers:
+  access-control-allow-origin: '*'
+  access-control-allow-headers: Accept, Authorization, Content-Type, Content-Length,
+    X-CSRF-Token, Token, session, Origin, Host, Connection, Accept-Encoding, Accept-Language,
+    X-Requested-With, Workspace, Workspace-Id, Role-Id, Deep, query
+drive:
+  storage: fireback-file-storage
+  port: "4506"
+  enabled: true

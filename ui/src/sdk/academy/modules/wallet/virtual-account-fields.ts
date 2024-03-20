@@ -1,0 +1,45 @@
+/**
+ * Fields for entity. Use this when creating forms in React/Angular,
+ * instead of giving string to each one, use it from here, so in case of
+ * updating any fields you don't loose it.
+ */
+
+export const VirtualAccountEntityFields = {
+  visibility: "visibility",
+  workspaceId: "workspaceId",
+  linkerId: "linkerId",
+  parentId: "parentId",
+  uniqueId: "uniqueId",
+  userId: "userId",
+  currencyId: "currencyId",
+  currency: {
+    visibility: "currency.visibility",
+    workspaceId: "currency.workspaceId",
+    linkerId: "currency.linkerId",
+    parentId: "currency.parentId",
+    uniqueId: "currency.uniqueId",
+    userId: "currency.userId",
+    translations: "currency.translations",
+    symbol: "currency.symbol",
+    name: "currency.name",
+    symbolNative: "currency.symbolNative",
+    decimalDigits: "currency.decimalDigits",
+    rounding: "currency.rounding",
+    code: "currency.code",
+    namePlural: "currency.namePlural",
+    rank: "currency.rank",
+    updated: "currency.updated",
+    created: "currency.created",
+    createdFormatted: "currency.createdFormatted",
+    updatedFormatted: "currency.updatedFormatted",
+  },
+  currency$: "currency",
+  name: "name",
+  summary: "summary",
+  summaryFormatted: "summaryFormatted",
+  rank: "rank",
+  updated: "updated",
+  created: "created",
+  createdFormatted: "createdFormatted",
+  updatedFormatted: "updatedFormatted",
+};

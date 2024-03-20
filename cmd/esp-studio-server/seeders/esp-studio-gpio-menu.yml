@@ -1,0 +1,58 @@
+- label: GPIO
+  uniqueId: gpio
+  visibility: A
+  workspaceId: system
+  translations:
+    - languageId: fa
+      label: پین ها
+
+- href: "/gpios"
+  workspaceId: system
+  icon: $gpio
+  uniqueId: Gpios
+  visibility: A
+  label: Gpios
+  translations:
+    - languageId: fa
+      label: پایه ها
+    - languageId: en
+      label: Gpios
+    
+  activeMatcher: /gpio/
+  applyType: permission
+  capabilityId: root/gpio/query
+  parentId: gpio
+ 
+- href: "/gpio-modes"
+  workspaceId: system
+  icon: $gpiomode
+  uniqueId: gpios
+  visibility: A
+  label: Gpio Modes
+  translations:
+    - languageId: fa
+      label: حالات پین
+    - languageId: en
+      label: Gpio Modes
+  activeMatcher: /gpio-mode/
+  applyType: permission
+  capabilityId: root/gpiomode/query
+  parentId: gpio
+ 
+ 
+- href: "/gpio-states"
+  workspaceId: system
+  icon: $gpiostate
+  uniqueId: gpio_states
+  visibility: A
+  label: Gpio States
+  translations:
+    - languageId: fa
+      label: وضعیت پین
+    - languageId: en
+      label: Gpio States
+  activeMatcher: /gpio-state/
+  applyType: permission
+  capabilityId: root/gpiomode/query
+  parentId: gpio
+ 

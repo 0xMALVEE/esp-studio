@@ -1,0 +1,35 @@
+- uniqueId: GPIO_MODE_DISABLE
+  description: disable input and output
+  visibility: A
+  index: 0
+  workspaceId: system
+
+- uniqueId: GPIO_MODE_INPUT
+  description: input only
+  visibility: A
+  index: 1
+  workspaceId: system
+
+- uniqueId: GPIO_MODE_OUTPUT
+  description: output only mode
+  visibility: A
+  index: 2
+  workspaceId: system
+
+- uniqueId: GPIO_MODE_OUTPUT_OD
+  description: output only with open-drain mode
+  visibility: A
+  index: 6
+  workspaceId: system
+
+- uniqueId: GPIO_MODE_INPUT_OUTPUT_OD
+  description: output and input with open-drain mode
+  visibility: A
+  index: 7
+  workspaceId: system
+
+- uniqueId: GPIO_MODE_INPUT_OUTPUT
+  description: output and input mode
+  index: 3
+  visibility: A
+  workspaceId: system

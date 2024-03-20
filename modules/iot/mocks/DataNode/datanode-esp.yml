@@ -1,0 +1,42 @@
+- visibility: A
+  name: "GPIO 1"
+  uniqueId: "GPIO_1"
+  typeId: int64
+  writers:
+    - fn: general_io_writer 
+  
+- visibility: A
+  name: "GPIO 2"
+  uniqueId: "GPIO_2"
+  typeId: int64
+  writers:
+    - fn: general_io_writer
+  
+- visibility: A
+  name: "GPIO 3"
+  uniqueId: "GPIO_3"
+  typeId: int64
+  writers:
+    - fn: general_io_writer
+  
+- visibility: A
+  name: "GPIO 4"
+  uniqueId: "GPIO_4"
+  typeId: int64
+  writers:
+    - fn: general_io_writer
+  
+- visibility: A
+  name: "GPIO 5"
+  uniqueId: "GPIO_5"
+  typeId: int64
+  writers:
+    - fn: general_io_writer
+
+- visibility: A
+  name: "GPIO 6"
+  uniqueId: "GPIO_6"
+  typeId: int64
+  writers:
+    - fn: general_io_writer
+  

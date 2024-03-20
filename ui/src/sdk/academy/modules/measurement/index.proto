@@ -1,0 +1,94 @@
+syntax = "proto3";
+    option go_package = "./artifacts/academy-server/release-tsjs/modules/measurement";
+
+import "artifacts/academy-server/release-tsjs/core/common.proto";
+
+
+
+
+  
+
+  
+
+  
+      
+service MeasureUnits {
+  rpc MeasureUnitActionCreate (MeasureUnitEntity) returns (MeasureUnitCreateReply) {}
+  rpc MeasureUnitActionUpdate (MeasureUnitEntity) returns (MeasureUnitCreateReply) {}
+
+  rpc MeasureUnitActionQuery (QueryFilterRequest) returns (MeasureUnitQueryReply) {}
+  rpc MeasureUnitActionGetOne (QueryFilterRequest) returns (MeasureUnitReply) {}
+  rpc MeasureUnitActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message MeasureUnitCreateReply {
+	MeasureUnitEntity data  = 1;
+	IError error = 2;
+}
+
+message MeasureUnitReply {
+	MeasureUnitEntity data = 1;
+	IError error = 2;
+}
+
+message MeasureUnitQueryReply {
+	repeated MeasureUnitEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message MeasureUnitEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string unit = 8; // @tag(  yaml:"unit"  )
+
+  optional string type = 9; // @tag(  yaml:"type"  )
+
+  optional string symbol = 10; // @tag(  yaml:"symbol"  )
+
+  optional string system = 11; // @tag(  yaml:"system"  )
+
+  optional string description = 12; // @tag(  yaml:"description"  )
+
+  int64 rank = 13; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 14; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 15; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 16; // @tag(sql:"-")
+  string updatedFormatted = 17; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+

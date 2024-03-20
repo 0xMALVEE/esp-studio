@@ -1,0 +1,1133 @@
+syntax = "proto3";
+    option go_package = "./artifacts/moshtariancheck-server/release-tsjs/modules/accounting";
+
+import "artifacts/moshtariancheck-server/release-tsjs/core/common.proto";
+import "artifacts/moshtariancheck-server/release-tsjs/modules/geo/index.proto";
+import "artifacts/moshtariancheck-server/release-tsjs/modules/loyalty/index.proto";
+import "artifacts/moshtariancheck-server/release-tsjs/modules/currency/index.proto";
+import "artifacts/moshtariancheck-server/release-tsjs/modules/drive/index.proto";
+
+
+
+
+  
+
+  
+
+  
+      
+service AcBankBranchs {
+  rpc AcBankBranchActionCreate (AcBankBranchEntity) returns (AcBankBranchCreateReply) {}
+  rpc AcBankBranchActionUpdate (AcBankBranchEntity) returns (AcBankBranchCreateReply) {}
+
+  rpc AcBankBranchActionQuery (QueryFilterRequest) returns (AcBankBranchQueryReply) {}
+  rpc AcBankBranchActionGetOne (QueryFilterRequest) returns (AcBankBranchReply) {}
+  rpc AcBankBranchActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcBankBranchCreateReply {
+	AcBankBranchEntity data  = 1;
+	IError error = 2;
+}
+
+message AcBankBranchReply {
+	AcBankBranchEntity data = 1;
+	IError error = 2;
+}
+
+message AcBankBranchQueryReply {
+	repeated AcBankBranchEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+;
+
+
+
+
+
+ 
+message AcBankBranchEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional AcBankBranchEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  repeated AcBankBranchEntityPolyglot translations = 8; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  /* One 2 one to external entity */
+  optional string locationId  = 11; // @tag(yaml:"locationId" )
+  GeoLocationEntity location = 12; // @tag(gorm:"foreignKey:LocationId;references:UniqueId" json:"location" yaml:"location" fbtype:"one")
+
+  optional string name = 13; // @tag(translate:"true"  yaml:"name"  )
+
+  /* One 2 one to external entity */
+  optional string bankId  = 15; // @tag(yaml:"bankId" )
+  AcBankEntity bank = 16; // @tag(gorm:"foreignKey:BankId;references:UniqueId" json:"bank" yaml:"bank" fbtype:"one")
+
+  int64 rank = 17; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 18; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 19; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 20; // @tag(sql:"-")
+  string updatedFormatted = 21; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message AcBankBranchEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service AcBanks {
+  rpc AcBankActionCreate (AcBankEntity) returns (AcBankCreateReply) {}
+  rpc AcBankActionUpdate (AcBankEntity) returns (AcBankCreateReply) {}
+
+  rpc AcBankActionQuery (QueryFilterRequest) returns (AcBankQueryReply) {}
+  rpc AcBankActionGetOne (QueryFilterRequest) returns (AcBankReply) {}
+  rpc AcBankActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcBankCreateReply {
+	AcBankEntity data  = 1;
+	IError error = 2;
+}
+
+message AcBankReply {
+	AcBankEntity data = 1;
+	IError error = 2;
+}
+
+message AcBankQueryReply {
+	repeated AcBankEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message AcBankEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional AcBankEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  repeated AcBankEntityPolyglot translations = 8; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 10; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 11; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 12; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 13; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 14; // @tag(sql:"-")
+  string updatedFormatted = 15; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message AcBankEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service AcBusinessAccounts {
+  rpc AcBusinessAccountActionCreate (AcBusinessAccountEntity) returns (AcBusinessAccountCreateReply) {}
+  rpc AcBusinessAccountActionUpdate (AcBusinessAccountEntity) returns (AcBusinessAccountCreateReply) {}
+
+  rpc AcBusinessAccountActionQuery (QueryFilterRequest) returns (AcBusinessAccountQueryReply) {}
+  rpc AcBusinessAccountActionGetOne (QueryFilterRequest) returns (AcBusinessAccountReply) {}
+  rpc AcBusinessAccountActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcBusinessAccountCreateReply {
+	AcBusinessAccountEntity data  = 1;
+	IError error = 2;
+}
+
+message AcBusinessAccountReply {
+	AcBusinessAccountEntity data = 1;
+	IError error = 2;
+}
+
+message AcBusinessAccountQueryReply {
+	repeated AcBusinessAccountEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message AcBusinessAccountEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional AcBusinessAccountEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  optional string currency = 9; // @tag(  yaml:"currency"  )
+
+  optional string name = 10; // @tag( validate:"required" yaml:"name"  )
+
+  int64 rank = 11; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 12; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 13; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 14; // @tag(sql:"-")
+  string updatedFormatted = 15; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service AcChecks {
+  rpc AcCheckActionCreate (AcCheckEntity) returns (AcCheckCreateReply) {}
+  rpc AcCheckActionUpdate (AcCheckEntity) returns (AcCheckCreateReply) {}
+
+  rpc AcCheckActionQuery (QueryFilterRequest) returns (AcCheckQueryReply) {}
+  rpc AcCheckActionGetOne (QueryFilterRequest) returns (AcCheckReply) {}
+  rpc AcCheckActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcCheckCreateReply {
+	AcCheckEntity data  = 1;
+	IError error = 2;
+}
+
+message AcCheckReply {
+	AcCheckEntity data = 1;
+	IError error = 2;
+}
+
+message AcCheckQueryReply {
+	repeated AcCheckEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+;
+
+;
+
+;
+
+;
+
+
+;
+
+
+
+
+
+ 
+message AcCheckEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional AcCheckEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  /* One 2 one to external entity */
+  optional string customerId  = 10; // @tag(yaml:"customerId" )
+  LoyaltyCustomerEntity customer = 11; // @tag(gorm:"foreignKey:CustomerId;references:UniqueId" json:"customer" yaml:"customer" fbtype:"one")
+
+  /* Many 2 many entities */
+  repeated string collectionsListId  = 13; // @tag(gorm:"-" sql:"-" yaml:"collectionsListId")
+  repeated AccountCollectionEntity collections = 14; // @tag(gorm:"many2many:acCheck_collections;foreignKey:UniqueId;references:UniqueId" yaml:"collections" fbtype:"many2many")
+
+  /* One 2 one to external entity */
+  optional string collectionId  = 16; // @tag(yaml:"collectionId" )
+  AccountCollectionEntity collection = 17; // @tag(gorm:"foreignKey:CollectionId;references:UniqueId" json:"collection" yaml:"collection" fbtype:"one")
+
+  int64 dueDate = 19;
+  string dueDateFormatted = 20;
+
+  int64 issueDate = 22;
+  string issueDateFormatted = 23;
+
+  /* One 2 one to external entity */
+  optional string bankBranchId  = 25; // @tag(yaml:"bankBranchId" )
+  AcBankBranchEntity bankBranch = 26; // @tag(gorm:"foreignKey:BankBranchId;references:UniqueId" json:"bankBranch" yaml:"bankBranch" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string recipientBankBranchId  = 28; // @tag(yaml:"recipientBankBranchId" )
+  AcBankBranchEntity recipientBankBranch = 29; // @tag(gorm:"foreignKey:RecipientBankBranchId;references:UniqueId" json:"recipientBankBranch" yaml:"recipientBankBranch" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string recipientCustomerId  = 31; // @tag(yaml:"recipientCustomerId" )
+  LoyaltyCustomerEntity recipientCustomer = 32; // @tag(gorm:"foreignKey:RecipientCustomerId;references:UniqueId" json:"recipientCustomer" yaml:"recipientCustomer" fbtype:"one")
+
+  optional double amount = 33; // @tag(  yaml:"amount"  )
+
+  string amountFormatted = 35; // @tag(sql:"-")
+
+  optional string identifier = 36; // @tag(  yaml:"identifier"  )
+
+  /* One 2 one to external entity */
+  optional string currencyId  = 38; // @tag(yaml:"currencyId" )
+  CurrencyEntity currency = 39; // @tag(gorm:"foreignKey:CurrencyId;references:UniqueId" json:"currency" yaml:"currency" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string statusId  = 41; // @tag(yaml:"statusId" )
+  AcCheckStatusEntity status = 42; // @tag(gorm:"foreignKey:StatusId;references:UniqueId" json:"status" yaml:"status" fbtype:"one")
+
+  int64 rank = 43; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 44; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 45; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 46; // @tag(sql:"-")
+  string updatedFormatted = 47; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service AcCheckStatuss {
+  rpc AcCheckStatusActionCreate (AcCheckStatusEntity) returns (AcCheckStatusCreateReply) {}
+  rpc AcCheckStatusActionUpdate (AcCheckStatusEntity) returns (AcCheckStatusCreateReply) {}
+
+  rpc AcCheckStatusActionQuery (QueryFilterRequest) returns (AcCheckStatusQueryReply) {}
+  rpc AcCheckStatusActionGetOne (QueryFilterRequest) returns (AcCheckStatusReply) {}
+  rpc AcCheckStatusActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcCheckStatusCreateReply {
+	AcCheckStatusEntity data  = 1;
+	IError error = 2;
+}
+
+message AcCheckStatusReply {
+	AcCheckStatusEntity data = 1;
+	IError error = 2;
+}
+
+message AcCheckStatusQueryReply {
+	repeated AcCheckStatusEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message AcCheckStatusEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional AcCheckStatusEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  repeated AcCheckStatusEntityPolyglot translations = 8; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 10; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 11; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 12; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 13; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 14; // @tag(sql:"-")
+  string updatedFormatted = 15; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message AcCheckStatusEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service AcCheckStatusHistorys {
+  rpc AcCheckStatusHistoryActionCreate (AcCheckStatusHistoryEntity) returns (AcCheckStatusHistoryCreateReply) {}
+  rpc AcCheckStatusHistoryActionUpdate (AcCheckStatusHistoryEntity) returns (AcCheckStatusHistoryCreateReply) {}
+
+  rpc AcCheckStatusHistoryActionQuery (QueryFilterRequest) returns (AcCheckStatusHistoryQueryReply) {}
+  rpc AcCheckStatusHistoryActionGetOne (QueryFilterRequest) returns (AcCheckStatusHistoryReply) {}
+  rpc AcCheckStatusHistoryActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcCheckStatusHistoryCreateReply {
+	AcCheckStatusHistoryEntity data  = 1;
+	IError error = 2;
+}
+
+message AcCheckStatusHistoryReply {
+	AcCheckStatusHistoryEntity data = 1;
+	IError error = 2;
+}
+
+message AcCheckStatusHistoryQueryReply {
+	repeated AcCheckStatusHistoryEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+;
+
+
+
+
+
+ 
+message AcCheckStatusHistoryEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional AcCheckStatusHistoryEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  repeated AcCheckStatusHistoryEntityPolyglot translations = 8; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string note = 10; // @tag(translate:"true"  yaml:"note"  )
+
+  /* One 2 one to external entity */
+  optional string fromStateId  = 12; // @tag(yaml:"fromStateId" )
+  AcCheckStatusEntity fromState = 13; // @tag(gorm:"foreignKey:FromStateId;references:UniqueId" json:"fromState" yaml:"fromState" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string checkId  = 15; // @tag(yaml:"checkId" )
+  AcCheckEntity check = 16; // @tag(gorm:"foreignKey:CheckId;references:UniqueId" json:"check" yaml:"check" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string toStateId  = 18; // @tag(yaml:"toStateId" )
+  AcCheckStatusEntity toState = 19; // @tag(gorm:"foreignKey:ToStateId;references:UniqueId" json:"toState" yaml:"toState" fbtype:"one")
+
+  int64 rank = 20; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 21; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 22; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 23; // @tag(sql:"-")
+  string updatedFormatted = 24; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message AcCheckStatusHistoryEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string note = 3; // @tag(yaml:"note" json:"note");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service AccountCollections {
+  rpc AccountCollectionActionCreate (AccountCollectionEntity) returns (AccountCollectionCreateReply) {}
+  rpc AccountCollectionActionUpdate (AccountCollectionEntity) returns (AccountCollectionCreateReply) {}
+
+  rpc AccountCollectionActionQuery (QueryFilterRequest) returns (AccountCollectionQueryReply) {}
+  rpc AccountCollectionActionGetOne (QueryFilterRequest) returns (AccountCollectionReply) {}
+  rpc AccountCollectionActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AccountCollectionCreateReply {
+	AccountCollectionEntity data  = 1;
+	IError error = 2;
+}
+
+message AccountCollectionReply {
+	AccountCollectionEntity data = 1;
+	IError error = 2;
+}
+
+message AccountCollectionQueryReply {
+	repeated AccountCollectionEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message AccountCollectionEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional AccountCollectionEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  repeated AccountCollectionEntityPolyglot translations = 8; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 10; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 11; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 12; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 13; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 14; // @tag(sql:"-")
+  string updatedFormatted = 15; // @tag(sql:"-")
+  repeated AccountCollectionEntity children = 16; // @tag(gorm:"-" sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message AccountCollectionEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service AcLegalUnits {
+  rpc AcLegalUnitActionCreate (AcLegalUnitEntity) returns (AcLegalUnitCreateReply) {}
+  rpc AcLegalUnitActionUpdate (AcLegalUnitEntity) returns (AcLegalUnitCreateReply) {}
+
+  rpc AcLegalUnitActionQuery (QueryFilterRequest) returns (AcLegalUnitQueryReply) {}
+  rpc AcLegalUnitActionGetOne (QueryFilterRequest) returns (AcLegalUnitReply) {}
+  rpc AcLegalUnitActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcLegalUnitCreateReply {
+	AcLegalUnitEntity data  = 1;
+	IError error = 2;
+}
+
+message AcLegalUnitReply {
+	AcLegalUnitEntity data = 1;
+	IError error = 2;
+}
+
+message AcLegalUnitQueryReply {
+	repeated AcLegalUnitEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message AcLegalUnitEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional AcLegalUnitEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  optional string legalType = 9; // @tag(  yaml:"legalType"  )
+
+  optional string name = 10; // @tag( validate:"required" yaml:"name"  )
+
+  int64 rank = 11; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 12; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 13; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 14; // @tag(sql:"-")
+  string updatedFormatted = 15; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service AcTransactions {
+  rpc AcTransactionActionCreate (AcTransactionEntity) returns (AcTransactionCreateReply) {}
+  rpc AcTransactionActionUpdate (AcTransactionEntity) returns (AcTransactionCreateReply) {}
+
+  rpc AcTransactionActionQuery (QueryFilterRequest) returns (AcTransactionQueryReply) {}
+  rpc AcTransactionActionGetOne (QueryFilterRequest) returns (AcTransactionReply) {}
+  rpc AcTransactionActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message AcTransactionCreateReply {
+	AcTransactionEntity data  = 1;
+	IError error = 2;
+}
+
+message AcTransactionReply {
+	AcTransactionEntity data = 1;
+	IError error = 2;
+}
+
+message AcTransactionQueryReply {
+	repeated AcTransactionEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+;
+
+
+
+
+
+ 
+message AcTransactionEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional AcTransactionEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  optional string title = 9; // @tag(  yaml:"title"  )
+
+  /* Many 2 many entities */
+  repeated string attachmentsListId  = 11; // @tag(gorm:"-" sql:"-" yaml:"attachmentsListId")
+  repeated FileEntity attachments = 12; // @tag(gorm:"many2many:acTransaction_attachments;foreignKey:UniqueId;references:UniqueId" yaml:"attachments" fbtype:"many2many")
+
+  optional string name = 13; // @tag(  yaml:"name"  )
+
+  Timestamp transactionDate = 14; // @tag( yaml:"transactionDate")
+
+  Timestamp settlementDate = 15; // @tag( yaml:"settlementDate")
+
+  optional string correspondence = 16; // @tag(  yaml:"correspondence"  )
+
+  optional string correspondenceAccount = 17; // @tag(  yaml:"correspondenceAccount"  )
+
+  optional double amount = 18; // @tag(  yaml:"amount"  )
+
+  optional double summary = 19; // @tag(  yaml:"summary"  )
+
+  /* One 2 one to external entity */
+  optional string accountId  = 21; // @tag(yaml:"accountId" )
+  AcBusinessAccountEntity account = 22; // @tag(gorm:"foreignKey:AccountId;references:UniqueId" json:"account" yaml:"account" fbtype:"one")
+
+  int64 rank = 23; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 24; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 25; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 26; // @tag(sql:"-")
+  string updatedFormatted = 27; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+message ImportSantanderCSVDto {
+    string driveUniqueId = 1;
+    string accountId = 2; // @tag(validate:"required")
+    string source = 3; // @tag(validate:"required")
+    string filePath = 4;
+}
+
+message CsvImportResultDto {
+    int64 totalRequested = 1;
+    int64 totalFailed = 2;
+}
+
+
+
+
+
+
+
+
+
+message CheckBalanceSheetReportRow {
+ 
+
+      string FirstName = 1; // @tag(  yaml:"name"  )
+  
+}
+
+
+
+  
+
+  
+
+  
+      
+service Intacodes {
+  rpc IntacodeActionCreate (IntacodeEntity) returns (IntacodeCreateReply) {}
+  rpc IntacodeActionUpdate (IntacodeEntity) returns (IntacodeCreateReply) {}
+
+  rpc IntacodeActionQuery (QueryFilterRequest) returns (IntacodeQueryReply) {}
+  rpc IntacodeActionGetOne (QueryFilterRequest) returns (IntacodeReply) {}
+  rpc IntacodeActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message IntacodeCreateReply {
+	IntacodeEntity data  = 1;
+	IError error = 2;
+}
+
+message IntacodeReply {
+	IntacodeEntity data = 1;
+	IError error = 2;
+}
+
+message IntacodeQueryReply {
+	repeated IntacodeEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message IntacodeEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional IntacodeEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  optional string note = 9; // @tag(  yaml:"note"  )
+
+  optional string description = 10; // @tag(  yaml:"description"  )
+
+  optional int64 year = 11; // @tag(  yaml:"year"  )
+
+  optional double margin = 12; // @tag(  yaml:"margin"  )
+
+  int64 rank = 13; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 14; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 15; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 16; // @tag(sql:"-")
+  string updatedFormatted = 17; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service TransactionTypes {
+  rpc TransactionTypeActionCreate (TransactionTypeEntity) returns (TransactionTypeCreateReply) {}
+  rpc TransactionTypeActionUpdate (TransactionTypeEntity) returns (TransactionTypeCreateReply) {}
+
+  rpc TransactionTypeActionQuery (QueryFilterRequest) returns (TransactionTypeQueryReply) {}
+  rpc TransactionTypeActionGetOne (QueryFilterRequest) returns (TransactionTypeReply) {}
+  rpc TransactionTypeActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message TransactionTypeCreateReply {
+	TransactionTypeEntity data  = 1;
+	IError error = 2;
+}
+
+message TransactionTypeReply {
+	TransactionTypeEntity data = 1;
+	IError error = 2;
+}
+
+message TransactionTypeQueryReply {
+	repeated TransactionTypeEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message TransactionTypeEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  optional TransactionTypeEntity parent = 5; // @tag(yaml:"parent")
+  string uniqueId = 6; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 7; // @tag(yaml:"userId")
+  repeated TransactionTypeEntityPolyglot translations = 8; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 10; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 11; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 12; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 13; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 14; // @tag(sql:"-")
+  string updatedFormatted = 15; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message TransactionTypeEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+
+
+
+
+
+
+message WarehouseCardexReportRow {
+ 
+
+      string DetailsRow = 1; // @tag(  yaml:"row"  )
+  
+      string DetailsId = 2; // @tag(  yaml:"id"  )
+  
+      string DetailsDate = 3; // @tag(  yaml:"date"  )
+  
+      string DetailsDescription = 4; // @tag(  yaml:"description"  )
+  
+      string BuyAmount = 5; // @tag(  yaml:"amount"  )
+  
+      string BuyCount = 6; // @tag(  yaml:"count"  )
+  
+      string BuyTotal = 7; // @tag(  yaml:"total"  )
+  
+      string SellAmount = 8; // @tag(  yaml:"amount"  )
+  
+      string SellCount = 9; // @tag(  yaml:"count"  )
+  
+      string SellTotal = 10; // @tag(  yaml:"total"  )
+  
+      string TotalAmount = 11; // @tag(  yaml:"amount"  )
+  
+      string TotalCount = 12; // @tag(  yaml:"count"  )
+  
+      string TotalTotal = 13; // @tag(  yaml:"total"  )
+  
+}
+

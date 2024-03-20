@@ -1,0 +1,13 @@
+fieldTranslations:
+  name:
+    en: Name
+    fa: ''
+  triggerType:
+    en: Trigger Type
+    fa: ''
+  triggerTypeCronjob:
+    en: Trigger Type Cronjob
+    fa: ''
+  triggerTypeGpioValue:
+    en: Trigger Type Gpio Value
+    fa: ''

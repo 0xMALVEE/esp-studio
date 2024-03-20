@@ -1,0 +1,34 @@
+fieldTranslations:
+  name:
+    en: Name
+    fa: ''
+  modbusId:
+    en: Modbus Id
+    fa: ''
+  device:
+    en: Device
+    fa: ''
+  connectionType:
+    en: Connection Type
+    fa: ''
+  functionCode:
+    en: Function Code
+    fa: ''
+  register:
+    en: Register
+    fa: ''
+  writeInterval:
+    en: Write Interval
+    fa: ''
+  readInterval:
+    en: Read Interval
+    fa: ''
+  range:
+    en: Range
+    fa: ''
+  length:
+    en: Length
+    fa: ''
+  variableType:
+    en: Variable Type
+    fa: ''

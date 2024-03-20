@@ -1,0 +1,19 @@
+fieldTranslations:
+  node:
+    en: Node
+    fa: ''
+  valueFloat64:
+    en: Value Float64
+    fa: ''
+  valueInt64:
+    en: Value Int64
+    fa: ''
+  valueString:
+    en: Value String
+    fa: ''
+  valueBoolean:
+    en: Value Boolean
+    fa: ''
+  ingestedAt:
+    en: Ingested At
+    fa: ''

@@ -1,0 +1,10 @@
+- uniqueId: valueGaugeNode
+  name: Value gauge node
+  translations:
+    - languageId: en
+      name: Value gauge node
+    - languageId: fa
+      name: گیج
+  workspaceId: system
+  visibility: A
+  isDirectInteractable: true

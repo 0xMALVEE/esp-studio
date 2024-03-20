@@ -1,0 +1,13 @@
+fieldTranslations:
+  x:
+    en: X
+    fa: ''
+  'y':
+    en: 'Y'
+    fa: ''
+  z:
+    en: Z
+    fa: ''
+  movableObject:
+    en: Movable Object
+    fa: ''

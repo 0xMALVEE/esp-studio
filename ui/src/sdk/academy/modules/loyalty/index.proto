@@ -1,0 +1,441 @@
+syntax = "proto3";
+    option go_package = "./artifacts/academy-server/release-tsjs/modules/loyalty";
+
+import "artifacts/academy-server/release-tsjs/core/common.proto";
+import "artifacts/academy-server/release-tsjs/modules/geo/index.proto";
+
+
+
+
+  
+
+  
+
+  
+      
+service BusinessCustomers {
+  rpc BusinessCustomerActionCreate (BusinessCustomerEntity) returns (BusinessCustomerCreateReply) {}
+  rpc BusinessCustomerActionUpdate (BusinessCustomerEntity) returns (BusinessCustomerCreateReply) {}
+
+  rpc BusinessCustomerActionQuery (QueryFilterRequest) returns (BusinessCustomerQueryReply) {}
+  rpc BusinessCustomerActionGetOne (QueryFilterRequest) returns (BusinessCustomerReply) {}
+  rpc BusinessCustomerActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message BusinessCustomerCreateReply {
+	BusinessCustomerEntity data  = 1;
+	IError error = 2;
+}
+
+message BusinessCustomerReply {
+	BusinessCustomerEntity data = 1;
+	IError error = 2;
+}
+
+message BusinessCustomerQueryReply {
+	repeated BusinessCustomerEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message BusinessCustomerEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated BusinessCustomerEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  optional string taxNumber = 10; // @tag(  yaml:"taxNumber"  )
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated BusinessCustomerContactPeopleEntity contactPeople = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"contactPeople")*/
+  repeated BusinessCustomerContactPeopleEntity contactPeople = 11; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"contactPeople" fbtype:"array")
+
+  int64 rank = 12; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 13; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 14; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 15; // @tag(sql:"-")
+  string updatedFormatted = 16; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message BusinessCustomerEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+  
+
+ 
+message BusinessCustomerContactPeopleEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated BusinessCustomerContactPeopleEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  optional string phoneNumber = 10; // @tag(  yaml:"phoneNumber"  )
+
+  optional string emailAddress = 11; // @tag(  yaml:"emailAddress"  )
+
+  int64 rank = 12; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 13; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 14; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 15; // @tag(sql:"-")
+  string updatedFormatted = 16; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message BusinessCustomerContactPeopleEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service CustomerTypes {
+  rpc CustomerTypeActionCreate (CustomerTypeEntity) returns (CustomerTypeCreateReply) {}
+  rpc CustomerTypeActionUpdate (CustomerTypeEntity) returns (CustomerTypeCreateReply) {}
+
+  rpc CustomerTypeActionQuery (QueryFilterRequest) returns (CustomerTypeQueryReply) {}
+  rpc CustomerTypeActionGetOne (QueryFilterRequest) returns (CustomerTypeReply) {}
+  rpc CustomerTypeActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message CustomerTypeCreateReply {
+	CustomerTypeEntity data  = 1;
+	IError error = 2;
+}
+
+message CustomerTypeReply {
+	CustomerTypeEntity data = 1;
+	IError error = 2;
+}
+
+message CustomerTypeQueryReply {
+	repeated CustomerTypeEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message CustomerTypeEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated CustomerTypeEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string title = 9; // @tag(translate:"true"  yaml:"title"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message CustomerTypeEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string title = 3; // @tag(yaml:"title" json:"title");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service LoyaltyCustomers {
+  rpc LoyaltyCustomerActionCreate (LoyaltyCustomerEntity) returns (LoyaltyCustomerCreateReply) {}
+  rpc LoyaltyCustomerActionUpdate (LoyaltyCustomerEntity) returns (LoyaltyCustomerCreateReply) {}
+
+  rpc LoyaltyCustomerActionQuery (QueryFilterRequest) returns (LoyaltyCustomerQueryReply) {}
+  rpc LoyaltyCustomerActionGetOne (QueryFilterRequest) returns (LoyaltyCustomerReply) {}
+  rpc LoyaltyCustomerActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message LoyaltyCustomerCreateReply {
+	LoyaltyCustomerEntity data  = 1;
+	IError error = 2;
+}
+
+message LoyaltyCustomerReply {
+	LoyaltyCustomerEntity data = 1;
+	IError error = 2;
+}
+
+message LoyaltyCustomerQueryReply {
+	repeated LoyaltyCustomerEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+;
+
+;
+
+;
+
+;
+
+
+
+
+
+ 
+message LoyaltyCustomerEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+    optional string note = 8; // @tag(  yaml:"note" gorm:"text" )
+    optional string noteExcerpt = 9; // @tag( yaml:"noteExcerpt" gorm:"text" )
+
+  optional string meetingNote = 10; // @tag(  yaml:"meetingNote"  )
+
+  optional string fullAddress = 11; // @tag(  yaml:"fullAddress"  )
+
+  optional string postalCode = 12; // @tag(  yaml:"postalCode"  )
+
+  string fullName = 14; // @tag(sql:"-")
+
+  /* One 2 one to external entity */
+  optional string typeId  = 16; // @tag(yaml:"typeId" )
+  CustomerTypeEntity type = 17; // @tag(gorm:"foreignKey:TypeId;references:UniqueId" json:"type" yaml:"type" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string personalDataId  = 19; // @tag(yaml:"personalDataId" )
+  PersonalCustomerEntity personalData = 20; // @tag(gorm:"foreignKey:PersonalDataId;references:UniqueId" json:"personalData" yaml:"personalData" fbtype:"one")
+
+  /* One 2 one to external entity */
+  optional string businessDataId  = 22; // @tag(yaml:"businessDataId" )
+  BusinessCustomerEntity businessData = 23; // @tag(gorm:"foreignKey:BusinessDataId;references:UniqueId" json:"businessData" yaml:"businessData" fbtype:"one")
+
+  /* Many 2 many entities */
+  repeated string locationsListId  = 25; // @tag(gorm:"-" sql:"-" yaml:"locationsListId")
+  repeated LocationDataEntity locations = 26; // @tag(gorm:"many2many:loyaltyCustomer_locations;foreignKey:UniqueId;references:UniqueId" yaml:"locations" fbtype:"many2many")
+
+  int64 rank = 27; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 28; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 29; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 30; // @tag(sql:"-")
+  string updatedFormatted = 31; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service PersonalCustomers {
+  rpc PersonalCustomerActionCreate (PersonalCustomerEntity) returns (PersonalCustomerCreateReply) {}
+  rpc PersonalCustomerActionUpdate (PersonalCustomerEntity) returns (PersonalCustomerCreateReply) {}
+
+  rpc PersonalCustomerActionQuery (QueryFilterRequest) returns (PersonalCustomerQueryReply) {}
+  rpc PersonalCustomerActionGetOne (QueryFilterRequest) returns (PersonalCustomerReply) {}
+  rpc PersonalCustomerActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message PersonalCustomerCreateReply {
+	PersonalCustomerEntity data  = 1;
+	IError error = 2;
+}
+
+message PersonalCustomerReply {
+	PersonalCustomerEntity data = 1;
+	IError error = 2;
+}
+
+message PersonalCustomerQueryReply {
+	repeated PersonalCustomerEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message PersonalCustomerEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated PersonalCustomerEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string firstName = 9; // @tag(translate:"true"  yaml:"firstName"  )
+
+  optional string lastName = 10; // @tag(translate:"true"  yaml:"lastName"  )
+
+  optional string phoneNumber = 11; // @tag(  yaml:"phoneNumber"  )
+
+  optional string nationalId = 12; // @tag(  yaml:"nationalId"  )
+
+  int64 rank = 13; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 14; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 15; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 16; // @tag(sql:"-")
+  string updatedFormatted = 17; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message PersonalCustomerEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string firstName = 3; // @tag(yaml:"firstName" json:"firstName");
+
+  string lastName = 4; // @tag(yaml:"lastName" json:"lastName");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+

@@ -1,0 +1,21 @@
+- uniqueId: sleep
+  visibility: A
+  name: Delay (Sleep)
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: تاخیری
+- uniqueId: iodirectwrite
+  visibility: A
+  name: GPIO Direct Write
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: تغییر وضعیت پایه
+- uniqueId: notification
+  visibility: A
+  name: Notification
+  workspaceId: system
+  translations:
+    - languageId: fa
+      name: پیامک

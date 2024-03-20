@@ -1,0 +1,15 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: modbus
+  name: Modbus
+  translations:
+    - languageId: fa
+      name: مدباس
+- visibility: A
+  workspaceId: system
+  uniqueId: soc
+  name: System on Chip
+  translations:
+    - languageId: fa
+      name: سیستم بر چیپ
+

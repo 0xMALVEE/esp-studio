@@ -1,0 +1,92 @@
+- uniqueId: "esp32_gpio_dashboard"
+  visibility: A
+  userId: null
+  workspaceId: root
+  name: "ESP32 GPIO"
+  layouts: '{"lg":[{"w":1,"h":3,"x":3,"y":0,"i":"ESP_GPIO4","moved":false,"static":false},{"w":1,"h":3,"x":4,"y":0,"i":"ESP_GPIO5","moved":false,"static":false},{"w":1,"h":3,"x":0,"y":0,"i":"ESP_GPIO13","moved":false,"static":false},{"w":1,"h":3,"x":1,"y":0,"i":"ESP_GPIO14","moved":false,"static":false},{"w":1,"h":3,"x":2,"y":0,"i":"ESP_GPIO15","moved":false,"static":false},{"w":1,"h":3,"x":5,"y":0,"i":"ESP_GPIO16","moved":false,"static":false},{"w":1,"h":3,"x":6,"y":0,"i":"ESP_GPIO17","moved":false,"static":false},{"w":1,"h":3,"x":7,"y":0,"i":"ESP_GPIO18","moved":false,"static":false},{"w":1,"h":3,"x":8,"y":0,"i":"ESP_GPIO19","moved":false,"static":false}],"xs":[{"w":2,"h":2,"x":2,"y":2,"i":"ESP_GPIO4","moved":false,"static":false},{"w":2,"h":2,"x":0,"y":4,"i":"ESP_GPIO5","moved":false,"static":false},{"w":2,"h":2,"x":0,"y":0,"i":"ESP_GPIO13","moved":false,"static":false},{"w":2,"h":2,"x":2,"y":0,"i":"ESP_GPIO14","moved":false,"static":false},{"w":2,"h":2,"x":0,"y":2,"i":"ESP_GPIO15","moved":false,"static":false},{"w":2,"h":2,"x":2,"y":4,"i":"ESP_GPIO16","moved":false,"static":false},{"w":2,"h":2,"x":0,"y":6,"i":"ESP_GPIO17","moved":false,"static":false},{"w":2,"h":2,"x":2,"y":6,"i":"ESP_GPIO18","moved":false,"static":false},{"w":4,"h":5,"x":0,"y":8,"i":"ESP_GPIO19","moved":false,"static":false}],"md":[{"w":2,"h":3,"x":6,"y":0,"i":"ESP_GPIO4","moved":false,"static":false},{"w":2,"h":3,"x":8,"y":0,"i":"ESP_GPIO5","moved":false,"static":false},{"w":2,"h":3,"x":0,"y":0,"i":"ESP_GPIO13","moved":false,"static":false},{"w":2,"h":3,"x":2,"y":0,"i":"ESP_GPIO14","moved":false,"static":false},{"w":2,"h":3,"x":4,"y":0,"i":"ESP_GPIO15","moved":false,"static":false},{"w":2,"h":2,"x":0,"y":3,"i":"ESP_GPIO16","moved":false,"static":false},{"w":2,"h":2,"x":2,"y":3,"i":"ESP_GPIO17","moved":false,"static":false},{"w":2,"h":2,"x":4,"y":3,"i":"ESP_GPIO18","moved":false,"static":false},{"w":2,"h":2,"x":6,"y":3,"i":"ESP_GPIO19","moved":false,"static":false}],"sm":[{"w":1,"h":3,"x":4,"y":0,"i":"ESP_GPIO4","moved":false,"static":false},{"w":1,"h":3,"x":5,"y":0,"i":"ESP_GPIO5","moved":false,"static":false},{"w":2,"h":3,"x":0,"y":0,"i":"ESP_GPIO13","moved":false,"static":false},{"w":1,"h":3,"x":2,"y":0,"i":"ESP_GPIO14","moved":false,"static":false},{"w":1,"h":3,"x":3,"y":0,"i":"ESP_GPIO15","moved":false,"static":false},{"w":2,"h":2,"x":0,"y":3,"i":"ESP_GPIO16","moved":false,"static":false},{"w":2,"h":2,"x":2,"y":3,"i":"ESP_GPIO17","moved":false,"static":false},{"w":1,"h":2,"x":4,"y":3,"i":"ESP_GPIO18","moved":false,"static":false},{"w":1,"h":2,"x":5,"y":3,"i":"ESP_GPIO19","moved":false,"static":false}],"xxs":[{"w":1,"h":3,"x":1,"y":3,"i":"ESP_GPIO4","moved":false,"static":false},{"w":1,"h":3,"x":0,"y":6,"i":"ESP_GPIO5","moved":false,"static":false},{"w":1,"h":3,"x":0,"y":0,"i":"ESP_GPIO13","moved":false,"static":false},{"w":1,"h":3,"x":1,"y":0,"i":"ESP_GPIO14","moved":false,"static":false},{"w":1,"h":3,"x":0,"y":3,"i":"ESP_GPIO15","moved":false,"static":false},{"w":1,"h":3,"x":1,"y":6,"i":"ESP_GPIO16","moved":false,"static":false},{"w":1,"h":2,"x":0,"y":9,"i":"ESP_GPIO17","moved":false,"static":false},{"w":1,"h":2,"x":1,"y":9,"i":"ESP_GPIO18","moved":false,"static":false},{"w":2,"h":3,"x":0,"y":11,"i":"ESP_GPIO19","moved":false,"static":false}]}'
+  translations:
+    - name: پین های ESP32
+      languageId: fa
+  widgets:
+
+  - title: "GPIO4"
+    uniqueId: "ESP_GPIO4"
+    workspaceId: system
+    translations:
+      - title: پایه IO ۴
+        languageId: fa
+    widgetId: single_digital_gpio
+    data: '{"dataNodeId": "GPIO_4", "name": "GPIO_4"}'
+  
+  - title: "GPIO5"
+    uniqueId: "ESP_GPIO5"
+    workspaceId: system
+    translations:
+      - title: پایه IO ۵
+        languageId: fa
+    widgetId: single_digital_gpio
+    data: '{"dataNodeId": "GPIO_5", "name": "GPIO_5"}'
+  
+  - title: "GPIO13"
+    uniqueId: "ESP_GPIO13"
+    workspaceId: system
+    translations:
+      - title: پایه IO ۱۳
+        languageId: fa
+    widgetId: single_digital_gpio
+    data: '{"dataNodeId": "GPIO_13", "name": "GPIO_13"}'
+  
+  - title: "GPIO14"
+    uniqueId: "ESP_GPIO14"
+    workspaceId: system
+    translations:
+      - title: پایه IO ۱۴
+        languageId: fa
+    widgetId: single_digital_gpio
+    data: '{"dataNodeId": "GPIO_14", "name": "GPIO_14"}'
+  
+  - title: "GPIO15"
+    uniqueId: "ESP_GPIO15"
+    workspaceId: system
+    translations:
+      - title: پایه IO ۱۵
+        languageId: fa
+    widgetId: single_digital_gpio
+    data: '{"dataNodeId": "GPIO_15", "name": "GPIO_15"}'
+  
+  - title: "GPIO16"
+    uniqueId: "ESP_GPIO16"
+    workspaceId: system
+    translations:
+      - title: پایه IO ۱۶
+        languageId: fa
+    widgetId: single_digital_gpio
+    data: '{"dataNodeId": "GPIO_16", "name": "GPIO_16"}'
+  
+  - title: "GPIO17"
+    uniqueId: "ESP_GPIO17"
+    workspaceId: system
+    translations:
+      - title: پایه IO ۱۷
+        languageId: fa
+    widgetId: single_digital_gpio
+    data: '{"dataNodeId": "GPIO_17", "name": "GPIO_17"}'
+  
+  - title: "GPIO18"
+    uniqueId: "ESP_GPIO18"
+    workspaceId: system
+    translations:
+      - title: پایه IO ۱۸
+        languageId: fa
+    widgetId: single_digital_gpio
+    data: '{"dataNodeId": "GPIO_18", "name": "GPIO_18"}'
+  
+  - title: "GPIO19"
+    uniqueId: "ESP_GPIO19"
+    workspaceId: system
+    translations:
+      - title: پایه IO ۱۹
+        languageId: fa
+    widgetId: single_digital_gpio
+    data: '{"dataNodeId": "GPIO_19", "name": "GPIO_19"}'
+  

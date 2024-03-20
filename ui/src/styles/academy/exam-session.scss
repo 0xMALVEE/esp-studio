@@ -1,0 +1,376 @@
+@import "./exam-session-dark.scss";
+
+.task {
+  margin: 20px 0;
+  h3 {
+    font-size: 20px;
+  }
+}
+
+.task-fill-in-blank-task {
+  line-height: 40px;
+
+  .inline-select-choice-group {
+    background-color: #e6e6e6;
+    padding: 1px 5px;
+    margin: 0 5px;
+  }
+
+  .selectable-word {
+    &:hover {
+      color: blue;
+      cursor: pointer;
+    }
+  }
+  .active {
+    text-decoration: underline;
+    font-weight: bold;
+  }
+}
+
+.general-speaking-task {
+  img {
+    max-width: 300px;
+    margin: 20px 0;
+  }
+}
+
+.tasks-recording-voice-set {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 30px;
+  .recorder {
+    margin-right: 50px;
+  }
+
+  .recording-not-available {
+    color: gray;
+  }
+}
+
+.btn.select-task-button {
+  margin: 10px auto;
+}
+.writing-tasks-table {
+  border: 1px solid black;
+  td,
+  th {
+    border: 1px solid black;
+    padding: 5px;
+  }
+}
+.selectable-answer {
+  label {
+    input {
+      margin-right: 6px;
+    }
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+}
+
+.task-boolean-questions {
+  line-height: 40px;
+  word-spacing: 3px;
+  font-size: 18px;
+}
+
+.task-multilong-questions-task {
+  .question-body {
+    padding: 15px;
+    border: 1px solid black;
+    margin-bottom: 15px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    padding-left: 20px;
+  }
+  .task-question-item {
+    padding: 15px;
+    margin-bottom: -1px;
+    margin-right: -1px;
+
+    &.example-highlight {
+      background: #bfbfbf;
+    }
+
+    h4 {
+      font-size: 18px;
+    }
+  }
+}
+
+.task-multishort-questions-task {
+  ul {
+    list-style: none;
+    padding: 0;
+    padding-left: 10px;
+  }
+  .task-question-item {
+    border: 1px solid black;
+    padding: 15px;
+    margin-bottom: -1px;
+    margin-right: -1px;
+
+    &.example-highlight {
+      background: #bfbfbf;
+    }
+
+    h4 {
+      font-size: 18px;
+    }
+  }
+}
+.example-highlight {
+  background: #bfbfbf !important;
+}
+.task-common-table {
+  td,
+  th {
+    padding: 5px;
+    border: 1px solid black;
+    font-size: 20px;
+  }
+
+  .numeric {
+    text-align: center;
+  }
+}
+
+.answer-box-table {
+  margin: auto;
+  // Wrong, what if there are 2 examples?
+  // tr td:first-child {
+  //   background: #bfbfbf;
+  // }
+  td,
+  th {
+    text-align: center;
+    border: 1px solid black;
+    font-size: 20px;
+  }
+  input {
+    border: 0;
+    width: 50px;
+  }
+}
+
+.polish-b1-listenning-intro {
+  text-align: center;
+  margin: 70px 0;
+
+  .section-title {
+    border: 3px solid #7f7f7f;
+    max-width: 500px;
+    font-size: 25px;
+    margin: 30px auto;
+    background: #e2e2e2;
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .level {
+    font-size: 80px;
+    font-weight: bold;
+  }
+  .count-tasks {
+    font-size: 25px;
+  }
+  .tasks-time {
+    font-size: 25px;
+  }
+  .name-and-lastname {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  .task-footer-info {
+    margin: 10px 0;
+    font-size: 20px;
+  }
+}
+
+.task-fill-in-sentence-task {
+  .task-question-item {
+    margin-bottom: 30px;
+    line-height: 35px;
+  }
+}
+
+.fill-in-from-list {
+  list-style: none;
+  display: flex;
+  background: #bfbfbf;
+  align-items: center;
+  justify-content: center;
+  li {
+    margin: 3px 10px;
+
+    &.is-preview {
+      text-decoration: line-through;
+    }
+  }
+}
+
+.answer-box-table.view-vertical {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .answer-box-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    tbody {
+      display: flex;
+      position: relative;
+      align-items: stretch;
+    }
+
+    tr {
+      flex-basis: 50%;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+    }
+
+    th,
+    td {
+      height: 50px;
+      flex-basis: 100%;
+      text-align: left;
+      display: flex;
+      padding: 2px;
+    }
+  }
+}
+
+.start-new-exam {
+  &.docked {
+    position: fixed;
+    right: 20px;
+    z-index: 7;
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.864);
+    padding: 20px;
+    border: 1px solid silver;
+  }
+
+  @media only screen and (max-width: 500px) {
+    &.docked {
+      padding: 10px;
+      right: 5px;
+      left: 5px;
+      bottom: 30px;
+      width: initial;
+    }
+  }
+}
+html[dir="rtl"] {
+  .start-new-exam {
+    &.docked {
+      right: auto;
+      left: 40px;
+    }
+  }
+}
+
+.inline-review-action {
+  button {
+    border: none;
+    border-radius: 8px;
+    padding: 0 10px;
+    line-height: 25px;
+    font-size: 13px;
+    margin: auto 3px;
+  }
+  .review-approve {
+    color: #007f00;
+    background: #8cf08c66;
+    &:hover {
+      background: #6dec6d;
+    }
+
+    &.selected {
+      color: white;
+      background-color: green;
+    }
+  }
+  .review-deny {
+    background: #ffacac63;
+    color: #f26e6e;
+    &:hover {
+      background: #f56b6b;
+    }
+
+    &.selected {
+      background-color: red;
+      color: white;
+    }
+  }
+}
+
+.highlight-incomplete-items {
+  .highlight-on-empty:not(.not-empty) {
+    background-color: yellow;
+  }
+}
+
+.fill-in-correct-answer {
+  color: green;
+  margin: auto 20px;
+}
+.answer-correct {
+  color: green;
+}
+.view-answers.highlight-correct {
+  background-color: rgb(90, 255, 90) !important;
+}
+.view-answers.highlight-incorrect {
+  background-color: rgb(255, 146, 146) !important;
+}
+.answer-incorrect {
+  color: red;
+}
+.answer-no-answer {
+  color: orange;
+}
+.answer-no-data {
+  color: gray;
+}
+
+.answer-box-text-input {
+  text-align: center;
+}
+
+.view-correct-choice {
+  .correct-answer {
+    background-color: rgb(90, 255, 90) !important;
+  }
+
+  .active:not(.correct-answer) {
+    background-color: rgb(255, 146, 146) !important;
+  }
+}
+
+.mac-theme {
+  /**
+  * Remember, we have dark, light, automatic mode.
+  * dark and light are choice of the user, regardless of system color
+  * if it's automatic, we use system theme
+  */
+  &:not(.light-theme) {
+    @media (prefers-color-scheme: dark) {
+      @include exam-session-dark();
+    }
+  }
+
+  // Now force the dark mode as well.
+  &.dark-theme {
+    @include exam-session-dark();
+  }
+}

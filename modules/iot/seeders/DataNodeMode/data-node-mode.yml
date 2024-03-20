@@ -1,0 +1,12 @@
+- visibility: A
+  workspaceId: system
+  uniqueId: "read"
+  name: "Read"
+- visibility: A
+  workspaceId: system
+  uniqueId: "write"
+  name: "Write"
+- visibility: A
+  workspaceId: system
+  uniqueId: "readwrite"
+  name: "readwrite"

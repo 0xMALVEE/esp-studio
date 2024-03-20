@@ -1,0 +1,42 @@
+#ifndef gpio_mode_csql_h
+#define gpio_mode_csql_h
+#include "./GpioModeDefinitions.dyno.h"
+const char * gpio_mode_create_sql = "CREATE TABLE IF NOT EXISTS fb_gpio_mode_entities ("
+        "`visibility` TEXT,"
+        "`parent_id` TEXT,"
+        "`linker_id` TEXT,"
+        "`workspace_id` TEXT,"
+        "`linked_id` TEXT,"
+        "`unique_id` TEXT,"
+        "`user_id` TEXT,"
+        "`rank` INTEGER,"
+        "`updated` INTEGER,"
+        "`created` INTEGER,"
+        "`created_formatted` TEXT,"
+        "`updated_formatted` TEXT,"
+        "`key` TEXT,"
+        "`index` INTEGER,"
+        "`description` TEXT,"
+    "PRIMARY KEY (unique_id)"
+" );";
+const char * gpio_mode_query_sql = "SELECT * FROM fb_gpio_mode_entities "
+;
+const char * gpio_mode_insert_sql = "INSERT INTO fb_gpio_mode_entities values ("
+    "'%q',"
+    "'%q',"
+    "'%q',"
+    "'%q',"
+    "'%q',"
+    "'%q',"
+    "'%q',"
+    "%f,"
+    "%f,"
+    "%f,"
+    "'%q',"
+    "'%q',"
+    "'%q',"
+    "%f,"
+    "'%q'"
+" );";
+;
+#endif

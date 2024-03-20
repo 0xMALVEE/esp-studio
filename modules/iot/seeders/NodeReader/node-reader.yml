@@ -1,0 +1,46 @@
+- visibility: A
+  workspaceId: system
+  name: Host FS File System
+  nativeFn: DnReadFsFromHost
+  uniqueId: DnReadFsFromHost
+- visibility: A
+  workspaceId: system
+  name: Host system virtual memory
+  nativeFn: DnReaderVirtualMemory
+  uniqueId: DnReaderVirtualMemory
+- visibility: A
+  workspaceId: system
+  name: Full Memory Reader
+  nativeFn: DnReaderVirtualMemoryFull
+  uniqueId: DnReaderVirtualMemoryFull
+- visibility: A
+  workspaceId: system
+  name: Fake environment
+  nativeFn: DnReadFakeEnvironemnt
+  uniqueId: DnReadFakeEnvironemnt
+- visibility: A
+  workspaceId: system
+  name: SerialPort Communication
+  nativeFn: DnReadSerialPort
+  uniqueId: DnReadSerialPort
+- visibility: A
+  workspaceId: system
+  name: MacOsx Fan Information
+  nativeFn: DnMacOsxFanInformation
+  uniqueId: DnMacOsxFanInformation
+- visibility: A
+  workspaceId: system
+  name: Read Mqtt topic
+  nativeFn: DnReadMQTTTopic
+  uniqueId: DnReadMQTTTopic
+  config: '{"topic": {"type": "string"}}'
+- visibility: A
+  workspaceId: system
+  name: Modbus TCP
+  nativeFn: DnReadModbusTCP
+  uniqueId: DnReadModbusTCP
+- visibility: A
+  workspaceId: system
+  name: Modbus RTU
+  nativeFn: DnReadModbusRTU
+  uniqueId: DnReadModbusRTU

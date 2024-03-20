@@ -1,0 +1,220 @@
+syntax = "proto3";
+    option go_package = "./artifacts/academy-server/release-tsjs/modules/shop";
+
+import "artifacts/academy-server/release-tsjs/core/common.proto";
+import "artifacts/academy-server/release-tsjs/modules/currency/index.proto";
+
+
+
+
+  
+
+  
+
+  
+      
+service ShopProductCategorys {
+  rpc ShopProductCategoryActionCreate (ShopProductCategoryEntity) returns (ShopProductCategoryCreateReply) {}
+  rpc ShopProductCategoryActionUpdate (ShopProductCategoryEntity) returns (ShopProductCategoryCreateReply) {}
+
+  rpc ShopProductCategoryActionQuery (QueryFilterRequest) returns (ShopProductCategoryQueryReply) {}
+  rpc ShopProductCategoryActionGetOne (QueryFilterRequest) returns (ShopProductCategoryReply) {}
+  rpc ShopProductCategoryActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ShopProductCategoryCreateReply {
+	ShopProductCategoryEntity data  = 1;
+	IError error = 2;
+}
+
+message ShopProductCategoryReply {
+	ShopProductCategoryEntity data = 1;
+	IError error = 2;
+}
+
+message ShopProductCategoryQueryReply {
+	repeated ShopProductCategoryEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+
+
+
+
+ 
+message ShopProductCategoryEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ShopProductCategoryEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional string name = 9; // @tag(translate:"true"  yaml:"name"  )
+
+  int64 rank = 10; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 11; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 12; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 13; // @tag(sql:"-")
+  string updatedFormatted = 14; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ShopProductCategoryEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+
+
+
+  
+
+  
+
+  
+      
+service ShopProducts {
+  rpc ShopProductActionCreate (ShopProductEntity) returns (ShopProductCreateReply) {}
+  rpc ShopProductActionUpdate (ShopProductEntity) returns (ShopProductCreateReply) {}
+
+  rpc ShopProductActionQuery (QueryFilterRequest) returns (ShopProductQueryReply) {}
+  rpc ShopProductActionGetOne (QueryFilterRequest) returns (ShopProductReply) {}
+  rpc ShopProductActionRemove (QueryFilterRequest) returns (RemoveReply) {}
+}
+
+message ShopProductCreateReply {
+	ShopProductEntity data  = 1;
+	IError error = 2;
+}
+
+message ShopProductReply {
+	ShopProductEntity data = 1;
+	IError error = 2;
+}
+
+message ShopProductQueryReply {
+	repeated ShopProductEntity items = 1;
+	int64 totalItems = 2;
+	int64 itemsPerPage = 3;
+	int64 startIndex = 4;
+	IError error = 5;
+}
+
+;
+
+
+;
+
+
+
+
+
+ 
+message ShopProductEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  repeated ShopProductEntityPolyglot translations = 7; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" json:"translations")
+  optional int64 acCode = 9; // @tag(  yaml:"acCode"  )
+
+  optional string name = 10; // @tag(translate:"true"  yaml:"name"  )
+
+  /* Many 2 many entities */
+  repeated string categoryListId  = 12; // @tag(gorm:"-" sql:"-" yaml:"categoryListId")
+  repeated ShopProductCategoryEntity category = 13; // @tag(gorm:"many2many:shopProduct_category;foreignKey:UniqueId;references:UniqueId" yaml:"category" fbtype:"many2many")
+
+  /* This is an object, another entity needs to be created for */
+  /*repeated ShopProductQrCodesEntity qrCodes = 14; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"qrCodes")*/
+  repeated ShopProductQrCodesEntity qrCodes = 14; // @tag(gorm:"foreignKey:LinkerId;references:UniqueId" yaml:"qrCodes" fbtype:"array")
+
+  int64 rank = 15; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 16; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 17; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 18; // @tag(sql:"-")
+  string updatedFormatted = 19; // @tag(sql:"-")
+}
+
+/* Because it has translation field, we need a translation table for this */
+message ShopProductEntityPolyglot {
+  string linkerId = 1; // @tag(gorm:"uniqueId;not null;size:100;" json:"linkerId" yaml:"linkerId")
+  string languageId = 2; // @tag(gorm:"uniqueId;not null;size:100;" json:"languageId" yaml:"languageId")
+
+  string name = 3; // @tag(yaml:"name" json:"name");
+
+}
+
+
+
+
+
+
+  
+
+ 
+message ShopProductQrCodesEntity {
+  optional string visibility = 1; // @tag(yaml:"visibility")
+  optional string workspaceId = 2; // @tag(yaml:"workspaceId")
+  optional string linkerId = 3; // @tag(yaml:"linkerId")
+  optional string parentId = 4; // @tag(yaml:"parentId")
+  string uniqueId = 5; // @tag(gorm:"primarykey;uniqueId;unique;not null;size:100;" yaml:"uniqueId")
+  optional string userId = 6; // @tag(yaml:"userId")
+  optional string code = 8; // @tag(  yaml:"code"  )
+
+  int64 rank = 9; // @tag(gorm:"type:int;name:rank")
+  int64 updated = 10; // @tag(gorm:"autoUpdateTime:nano")
+  int64 created = 11; // @tag(gorm:"autoUpdateTime:nano")
+  string createdFormatted = 12; // @tag(sql:"-")
+  string updatedFormatted = 13; // @tag(sql:"-")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+* Add your custom services, and messages here.
+* It can be your dto for example. 
+* - Use Module.yml for entities, otherwise it won't be managed
+* - Don't use this file for entities might be queried by web
+**/
+      
+
+

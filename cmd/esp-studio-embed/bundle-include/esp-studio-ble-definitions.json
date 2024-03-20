@@ -1,0 +1,36 @@
+{
+   "_comment": [
+      "Add UUIDs for your services, characteristics, and descriptors in this file.",
+      "The format is the UUID of the item, followed by an object containing the data.",
+      "'name' is a mandatory handle, while 'format' is optional.",
+      "Currently the only supported format is 'TEXT', default is 'NO_FORMAT'.",
+      "The application must be reloaded to access changes in this file."
+   ],
+   "uuid16bitServiceDefinitions": {},
+   "uuid128bitServiceDefinitions": {
+      "0000018000001000800000805f9b34fb": {
+         "name": "Fireback Config"
+      }
+   },
+   "uuid16bitCharacteristicDefinitions": {},
+   "uuid128bitCharacteristicDefinitions": {
+      "0000fef400001000800000805f9b34fb": {
+         "name": "Ping",
+         "format": "TEXT"
+      },
+      "0000decc00001000800000805f9b34fb": {
+         "name": "Reset",
+         "format": "TEXT"
+      },
+      "0000debb00001000800000805f9b34fb": {
+         "name": "Set PASSWORD",
+         "format": "TEXT"
+      },
+      "0000dead00001000800000805f9b34fb": {
+         "name": "Set SSID",
+         "format": "TEXT"
+      }
+   },
+   "uuid16bitDescriptorDefinitions": {},
+   "uuid128bitDescriptorDefinitions": {}
+}

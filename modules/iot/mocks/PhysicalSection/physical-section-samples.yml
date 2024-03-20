@@ -1,0 +1,33 @@
+- visibility: A
+  name: "Building 1"
+  uniqueId: "building1"
+  translation:
+    - languageId: fa
+      name: ساختمان ۱
+- visibility: A
+  name: "Golbarg Building"
+  uniqueId: "golbargbuilding"
+  translation:
+    - languageId: fa
+      name: ساختمان گلبرگ
+- visibility: A
+  name: "Golbarg Kitchen"
+  parentId: golbargbuilding
+  uniqueId: "golbargkitchen"
+  translation:
+    - languageId: fa
+      name: آشپزخانه گلبرگ
+- visibility: A
+  name: "Clean Kitchen"
+  parentId: golbargkitchen
+  uniqueId: "golbargkitchenclean"
+  translation:
+    - languageId: fa
+      name: آشپزخانه تمیز
+- visibility: A
+  name: "Dirty Kitchen"
+  parentId: golbargkitchen
+  uniqueId: "golbargkitchendirty"
+  translation:
+    - languageId: fa
+      name: آشپزخانه کثیف
